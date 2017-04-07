@@ -13,8 +13,23 @@ let setAttribs = (target, array) =>
 
 let zoom = 2
 
-let color = lightness =>
+let hlsColor = lightness =>
 "hsl(120,100%," + (100 * lightness | 0) + "%)"
+
+let hexColor = lightness =>
+{
+	lightness *= 511
+	const hx = twoHex (lightness % 256)
+	return lightness < 256 ?
+	"#00" + hx + "00" :
+	"#" + hx + "FF" + hx
+}
+let twoHex = num =>
+{
+	let out = (num | 0).toString(16)
+	out.length <= 1 && (out = "0" + out)
+	return out
+}
 
 let exportSvg = function ()
 {
@@ -57,7 +72,7 @@ var displaySvg = (rollout, radix = 2, number) =>
 					y: rIndex * zoom,
 					height: zoom,
 					width: zoom * streak,
-					fill: "hsl(120,100%," + ((100 * Number.parseInt(prevSymbol, radix) / (radix - 1)) | 0) + "%)"
+					fill: hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
 				}))
 				prevSymbol = symbol
 				streak = 1
@@ -69,7 +84,7 @@ var displaySvg = (rollout, radix = 2, number) =>
 			y: rIndex * zoom,
 			height: zoom,
 			width: zoom * streak,
-			fill: "hsl(120,100%," + ((100 * Number.parseInt(prevSymbol, radix) / (radix - 1)) | 0) + "%)"
+			fill: hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
 		}))
 	})
 	return el
