@@ -1,0 +1,16 @@
+html
+{
+	font-family: "Source Serif Pro", monospace;
+	background-color: #808080;
+}
+
+div
+{
+	text-align: center;
+}
+
+body
+{
+	display: flex;
+	flex-wrap: wrap;
+}
