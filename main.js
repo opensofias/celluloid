@@ -19,7 +19,7 @@ var block = rollout =>
 
 var makeAll = (config) =>
 {
-	removeAll("svg")
+	removeAll(["canvas", "svg"])
 	let {neighbors, radix, start, end, page, amount, seed, render} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
@@ -32,4 +32,8 @@ var makeAll = (config) =>
 	while (++ count < end)
 }
 
-var removeAll = tag => Array.from(document.body.getElementsByTagName(tag)).forEach (el => document.body.removeChild(el))
+var removeAll = tags =>
+	tags.forEach(tag =>
+		Array.from(document.body.getElementsByTagName(tag))
+		.forEach (el => document.body.removeChild(el))
+	)
