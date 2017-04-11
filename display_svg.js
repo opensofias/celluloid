@@ -8,8 +8,13 @@ let makeSVG = (tag, attribs = {}, append_to = false) =>
 	return el
 }
 
-let setAttribs = (target, array) =>
-	array.forEach (attr => target.setAttribute (attr[0], attr[1]))
+let makeElement = (tag, attribs = {}, append_to = false) =>
+{
+	let el = document.createElement(tag)
+	for (let key in attribs) el.setAttribute (key, attribs[key])
+	append_to && append_to.appendChild(el)
+	return el
+}
 
 let zoom = 2
 
@@ -33,12 +38,65 @@ let twoHex = num =>
 
 let exportSvg = function ()
 {
-	let url = "data:image/svg+xml;charset=utf8,<?xml version=\"1.0\" standalone=\"no\"?>" + this.outerHTML
+	let url = "data:image/svg+xml;charset=utf8,<?xml version=\"1.0\"?>" + this.outerHTML
 	window.open(url)
 }
 
-var displaySvg = (rollout, radix = 2, number) =>
+var displayCanvas = (rollout, config, number) =>
 {
+	const {radix} = config
+
+	const el = makeElement ("canvas",
+	{
+		height: (rollout.length) * zoom,
+		width: (rollout[0].length) * zoom,
+		title: number
+	})
+	const ctx = el.getContext("2d")
+
+	el.addEventListener ("click", function (ev){open(this.toDataURL())})
+
+	rollout.forEach ((row, rIndex) =>
+	{
+		const shift = (rollout[0].length - row.length) / 2
+		row = row.split("")
+		let prevSymbol = row[0]
+		let streak = 0
+
+		row.forEach ((symbol, cIndex) =>
+		{
+			if (symbol == prevSymbol) streak ++
+			else if (streak)
+			{
+				ctx.fillStyle = hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
+				ctx.fillRect
+				(
+					(shift + cIndex - streak) * zoom,
+					rIndex * zoom,
+					zoom * streak,
+					zoom
+				)
+				prevSymbol = symbol
+				streak = 1
+			}
+		})
+		ctx.fillStyle = hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
+		ctx.fillRect
+		(
+			(row.length + shift - streak) * zoom,
+			rIndex * zoom,
+			zoom * streak,
+			zoom
+		)
+
+	})
+	return el
+}
+
+var displaySvg = (rollout, config, number) =>
+{
+	const {radix} = config
+
 	const el = makeSVG("svg",
 	{
 		height: (rollout.length) * zoom,
@@ -46,6 +104,7 @@ var displaySvg = (rollout, radix = 2, number) =>
 		version: "1.1",
     xmlns: "http://www.w3.org/2000/svg"
 	})
+
 
 	el.addEventListener("click", exportSvg)
 	
@@ -78,7 +137,7 @@ var displaySvg = (rollout, radix = 2, number) =>
 				streak = 1
 			}
 		})
-		el.appendChild( makeSVG("rect",
+		el.appendChild(makeSVG("rect",
 		{
 			x: (row.length + shift - streak) * zoom,
 			y: rIndex * zoom,

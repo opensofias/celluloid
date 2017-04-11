@@ -20,14 +20,14 @@ var block = rollout =>
 var makeAll = (config) =>
 {
 	removeAll("svg")
-	let {neighbors, radix, start, end, page, amount, seed} = config
+	let {neighbors, radix, start, end, page, amount, seed, render} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
 	let count = start;
 	do
 	{
-		const svg = displaySvg(rollout (seedGen(seed), new Rule(radix,neighbors,count)),radix, count)
-		document.body.appendChild(svg)
+		const el = (render == "svg" ? displaySvg : displayCanvas)(rollout (seedGen(seed), new Rule(radix,neighbors,count)), config, count)
+		document.body.appendChild(el)
 	}
 	while (++ count < end)
 }

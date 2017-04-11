@@ -16,6 +16,17 @@ var rabbitStep = prev =>
 	.split("1").join("10")
 	.split("i").join("1")
 
+var morseStep = prev =>
+	prev
+	.split("0").join("0i")
+	.split("1").join("10")
+	.split("i").join("1")
+
+var rabbitStep2 = prev =>
+	prev.split("").map(s => s == 1 ? "10" : "1").join("")
+
+var morseStep2 = prev =>
+	prev.split("").map(s => s == 1 ? "10" : "01").join("")
 
 var recurTimes = (fun, times, start) =>
 {
