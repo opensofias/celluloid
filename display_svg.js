@@ -16,8 +16,6 @@ let makeElement = (tag, attribs = {}, append_to = false) =>
 	return el
 }
 
-let zoom = 2
-
 let hlsColor = lightness =>
 "hsl(120,100%," + (100 * lightness | 0) + "%)"
 
@@ -44,7 +42,8 @@ let exportSvg = function ()
 
 var displayCanvas = (rollout, config, number) =>
 {
-	const {radix} = config
+	var {radix, zoom} = config
+	zoom = zoom || 2
 
 	const el = makeElement ("canvas",
 	{
@@ -95,7 +94,8 @@ var displayCanvas = (rollout, config, number) =>
 
 var displaySvg = (rollout, config, number) =>
 {
-	const {radix} = config
+	var {radix, zoom} = config
+	zoom = zoom || 2
 
 	const el = makeSVG("svg",
 	{
