@@ -1,31 +1,13 @@
 'use strict'
 
-var thueMorse = iter => range(1, Math.abs(iter))
-.reduce(a => a.concat(a.map(x => 1 - x)), [0])
-.join('');
-
-let range = (m, n) => Array.from ({
-	length: Math.floor((n - m)) + 1
-}, (_, i) => m + i);
+var thueMorse = iter => recurTimes (morseStep, iter, "0")
 
 var rabbit = iter => recurTimes (rabbitStep, iter, "0")
 
 var rabbitStep = prev =>
-	prev
-	.split("0").join("i")
-	.split("1").join("10")
-	.split("i").join("1")
-
-var morseStep = prev =>
-	prev
-	.split("0").join("0i")
-	.split("1").join("10")
-	.split("i").join("1")
-
-var rabbitStep2 = prev =>
 	prev.split("").map(s => s == 1 ? "10" : "1").join("")
 
-var morseStep2 = prev =>
+var morseStep = prev =>
 	prev.split("").map(s => s == 1 ? "10" : "01").join("")
 
 var recurTimes = (fun, times, start) =>
