@@ -17,6 +17,23 @@ var block = rollout =>
 	return el
 }
 
+window.onhashchange = _ =>
+{
+	let uriObj = fromUri(location.hash)
+	makeAll (uriObj)
+	updateNav (uriObj)
+}
+
+var updateNav = (uriObj) =>
+{
+	var {page} = uriObj
+	document.getElementById("prev").setAttribute("href", 
+	toUri (Object.assign({}, uriObj, {page: page - 1})))
+
+	document.getElementById("next").setAttribute("href", 
+	toUri (Object.assign({}, uriObj, {page: page + 1})))
+}
+
 var makeAll = (config) =>
 {
 	removeAll(["canvas", "svg"])

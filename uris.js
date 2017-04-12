@@ -28,8 +28,3 @@ var fromUri =
 		+ '}'
 	)
 
-window.onhashchange = _ =>
-{
-	let uriObj = fromUri(location.hash)
-	makeAll (uriObj)
-}

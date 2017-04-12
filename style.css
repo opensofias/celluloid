@@ -1,6 +1,6 @@
 html
 {
-	font-family: "Source Serif Pro", monospace;
+	font-family: "Source Sans Pro", sans-serif;
 	background-color: #808080;
 }
 
@@ -10,6 +10,40 @@ div
 }
 
 body
+{
+	margin: 0  0  0 32px;
+}
+
+nav
+{
+	position: fixed;
+	top: 0; left: 0;
+	width: 24px; height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-content: stretch;
+	align-items: stretch;
+}
+
+nav > a
+{
+	color: #000;
+	display: block;
+	background-color: #c0c0c0;
+	text-align: center;
+	line-height: 0;
+	padding-top: 25vh; 
+	padding-bottom: 25vh; 
+	text-decoration: none;
+	font-size: 24px;
+}
+
+nav > a:hover
+{
+	background-color: #e0e0e0;
+}
+
+main
 {
 	display: flex;
 	flex-wrap: wrap;
