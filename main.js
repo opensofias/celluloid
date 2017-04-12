@@ -28,10 +28,10 @@ var updateNav = (uriObj) =>
 {
 	var {page} = uriObj
 	document.getElementById("prev").setAttribute("href", 
-	toUri (Object.assign({}, uriObj, {page: page - 1})))
+	toUri (Object.assign({}, {amount: 4}, uriObj, {page: page - 1})))
 
 	document.getElementById("next").setAttribute("href", 
-	toUri (Object.assign({}, uriObj, {page: page + 1})))
+	toUri (Object.assign({}, {amount: 4}, uriObj, {page: page + 1})))
 }
 
 var makeAll = (config) =>
