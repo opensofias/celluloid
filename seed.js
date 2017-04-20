@@ -21,6 +21,10 @@ var seedGen = seedString =>
 			return repeatedReplace (seedParam, "0", "01", "10")
 		case ("rb"): // Fibonacci rabbit sequence
 			return repeatedReplace (seedParam, "0", "1", "10")
+		case ("cr"): // single core
+			return repeatedReplace (seedParam, "010", "00", "1")
+		case ("ts"): // transition
+			return repeatedReplace (seedParam, "01", "00", "11")
 		case ("rr"):
 			return repeatedReplace (...seedParam.split("."))
 	}
