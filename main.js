@@ -12,21 +12,24 @@ var rollout = (sequence, rule) =>
 
 window.onhashchange = _ =>
 {
-	let uriObj = fromUri(location.hash)
-	makeAll (uriObj)
+	const uriObj = fromUri(location.hash)
 	updateNav (uriObj)
+	makeAll (uriObj)
 }
 
-var updateNav = (uriObj) =>
+var updateNav = config =>
 {
-	var {page} = uriObj
+	const {page} = config
 	document.getElementById("prev").setAttribute("href", 
-	toUri (Object.assign({}, {amount: 4}, uriObj, {page: page - 1})))
+	toUri (Object.assign({}, config, {page: page - 1})))
 	document.getElementById("next").setAttribute("href", 
-	toUri (Object.assign({}, {amount: 4}, uriObj, {page: page + 1})))
+	toUri (Object.assign({}, config, {page: page + 1})))
 }
 
-var makeAll = (config) =>
+var setDefaults = config =>
+	Object.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: "ts6"}, config)
+
+var makeAll = config =>
 {
 	removeAll(["canvas", "svg"])
 	let {neighbors, radix, start, end, page, amount, seed, render} = config
