@@ -6,17 +6,14 @@ var repeatedReplace = (iterations, first, ...lookup) =>
 var repStep = (prev, array) =>
 	prev.split ("").map (s => array[Number.parseInt(s)] || "").join ("")
 
-var recurTimes = (fun, times, step, ...params) =>
-{
+var recurTimes = (fun, times, step, ...params) => {
 	while (times -- > 0) step = fun(step, ...params)
 	return step
 }
 
-var seedGen = seedString =>
-{
+var seedGen = seedString => {
 	const seedParam = seedString.slice (2)
-	switch (seedString.slice (0, 2))
-	{
+	switch (seedString.slice (0, 2)) {
 		case ("tm"): // Thue-Morse sequence
 			return repeatedReplace (seedParam, "0", "01", "10")
 		case ("rb"): // Fibonacci rabbit sequence
@@ -27,5 +24,4 @@ var seedGen = seedString =>
 			return repeatedReplace (seedParam, "01", "00", "11")
 		case ("rr"):
 			return repeatedReplace (...seedParam.split("."))
-	}
-}
+}}

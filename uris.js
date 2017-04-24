@@ -4,10 +4,8 @@
 
 //var replace = (old, newer) =>
 
-var toUri =
-	obj =>
-	'#' + encodeURI
-	(
+var toUri = obj =>
+	'#' + encodeURI (
 		JSON.stringify(obj)
 		.slice(2,-1)
 		.split(',"').join(',')
@@ -15,11 +13,9 @@ var toUri =
 		.split('"').join("'")
 	)
 
-var fromUri =
-	uriString =>
+var fromUri = uriString =>
 	uriString.length <= 1 ? {} :
-	JSON.parse
-	(
+	JSON.parse (
 		'{"' +
 		decodeURI(uriString.slice(1))
 		.split("'").join('"')
@@ -27,4 +23,3 @@ var fromUri =
 		.split(':').join('":')
 		+ '}'
 	)
-
