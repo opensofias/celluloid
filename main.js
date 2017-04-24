@@ -10,13 +10,6 @@ var rollout = (sequence, rule) =>
 	return result
 }
 
-var block = rollout =>
-{
-	let el = document.createElement("div")
-	el.innerHTML = rollout.join("<br/>")
-	return el
-}
-
 window.onhashchange = _ =>
 {
 	let uriObj = fromUri(location.hash)
