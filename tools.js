@@ -1,0 +1,1 @@
+var [O, A, d] = [Object, Array, document]

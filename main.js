@@ -15,14 +15,14 @@ window.onhashchange = _ => {
 
 var updateNav = config => {
 	const {page} = config
-	document.getElementById("prev").setAttribute("href", 
-	toUri (Object.assign({}, config, {page: page - 1})))
-	document.getElementById("next").setAttribute("href", 
-	toUri (Object.assign({}, config, {page: page + 1})))
+	d.getElementById("prev").setAttribute("href", 
+	toUri (O.assign({}, config, {page: page - 1})))
+	d.getElementById("next").setAttribute("href", 
+	toUri (O.assign({}, config, {page: page + 1})))
 }
 
 var setDefaults = config =>
-	Object.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: "ts6"}, config)
+	O.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: "ts6"}, config)
 
 var makeAll = config => {
 	removeAll(["canvas", "svg"])
@@ -32,12 +32,12 @@ var makeAll = config => {
 	let count = start;
 	do {
 		const el = (render == "svg" ? displaySvg : displayCanvas)(rollout (seedGen(seed), new Rule(radix,neighbors,count)), config, count)
-		document.body.appendChild(el)
+		d.body.appendChild(el)
 	} while (++ count < end)
 }
 
 var removeAll = tags =>
 	tags.forEach(tag =>
-		Array.from(document.body.getElementsByTagName(tag))
-		.forEach (el => document.body.removeChild(el))
+		Array.from(d.body.getElementsByTagName(tag))
+		.forEach (el => d.body.removeChild(el))
 	)

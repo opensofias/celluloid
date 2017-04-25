@@ -4,6 +4,22 @@
 
 //var replace = (old, newer) =>
 
+var toUriMap = {
+	',"':',',
+	'":':':',
+	'"':"'"
+}
+
+var fromUriMap = {}
+for (let key in toUriMap) fromUriMap[toUriMap[key]] = key
+
+var fromUriMap2 =
+	Object.entries(toUriMap)
+	.reduce ((acc, k_v) => 
+			{acc[k_v[1]] = k_v[0]; return acc}
+		, {}
+	)
+
 var toUri = obj =>
 	'#' + encodeURI (
 		JSON.stringify(obj)

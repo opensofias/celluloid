@@ -1,14 +1,14 @@
 "use strict"
 
 let makeSVG = (tag, attribs = {}, append_to = false) => {
-	let el = document.createElementNS("http://www.w3.org/2000/svg", tag)
+	let el = d.createElementNS("http://www.w3.org/2000/svg", tag)
 	for (let key in attribs) el.setAttribute (key, attribs[key])
 	append_to && append_to.appendChild(el)
 	return el
 }
 
 let makeElement = (tag, attribs = {}, append_to = false) => {
-	let el = document.createElement(tag)
+	let el = d.createElement(tag)
 	for (let key in attribs) el.setAttribute (key, attribs[key])
 	append_to && append_to.appendChild(el)
 	return el
