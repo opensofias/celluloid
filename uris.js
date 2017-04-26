@@ -14,7 +14,7 @@ var fromUriMap = {}
 for (let key in toUriMap) fromUriMap[toUriMap[key]] = key
 
 var fromUriMap2 =
-	Object.entries(toUriMap)
+	O.entries(toUriMap)
 	.reduce ((acc, k_v) => 
 			{acc[k_v[1]] = k_v[0]; return acc}
 		, {}
