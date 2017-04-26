@@ -2,8 +2,6 @@
 
 //uri-friendly json notation
 
-//var replace = (old, newer) =>
-
 var toUriMap = {
 	',"':',',
 	'":':':',
@@ -19,6 +17,7 @@ var fromUriMap2 =
 			{acc[k_v[1]] = k_v[0]; return acc}
 		, {}
 	)
+
 
 var toUri = obj =>
 	'#' + encodeURI (
@@ -38,4 +37,10 @@ var fromUri = uriString =>
 		.split(',').join(',"')
 		.split(':').join('":')
 		+ '}'
+	)
+
+var replaceInString = (string, replaceMap) =>
+	O.entries(replaceMap).reduce (
+		(acc, val) => acc.split(val[0]).join(val[1]),
+		string
 	)

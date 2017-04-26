@@ -8,16 +8,16 @@ var rollout = (sequence, rule) => {
 }
 
 window.onhashchange = _ => {
-	const uriObj = fromUri(location.hash)
+	const uriObj = setDefaults (fromUri (location.hash))
 	updateNav (uriObj)
 	makeAll (uriObj)
 }
 
 var updateNav = config => {
 	const {page} = config
-	d.getElementById("prev").setAttribute("href", 
+	d.getElementById("prev").setAttribute("href",
 	toUri (O.assign({}, config, {page: page - 1})))
-	d.getElementById("next").setAttribute("href", 
+	d.getElementById("next").setAttribute("href",
 	toUri (O.assign({}, config, {page: page + 1})))
 }
 
