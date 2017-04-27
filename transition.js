@@ -3,7 +3,7 @@
 let mod = (x, y) => (x % y + y) % y
 
 class Rule {
-	constructor ({radix, neighbors, seed}) {
+	constructor ({radix, neighbors}, seed) {
 		this.radix = radix
 		this.seed = seed
 		this.neighbors = neighbors

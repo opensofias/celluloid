@@ -33,7 +33,7 @@ var makeAll = config => {
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
 	let count = start;
 	do {
-		const el = (render == 'svg' ? displaySvg : displayCanvas)(rollout (seedGen(seed), new Rule(config)), config, count)
+		const el = (render == 'svg' ? displaySvg : displayCanvas)(rollout (seedGen(seed), new Rule(config,count)), config, count)
 		d.body.appendChild(el)
 	} while (++ count < end)
 }
