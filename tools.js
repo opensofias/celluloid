@@ -47,3 +47,8 @@ var flatten = array =>
 			child
 		), []
 )
+
+var flipObj = obj =>
+	O.keys(obj).reduce ((acc, key) =>
+		(acc[obj[key]] = key) && acc
+	, {})
