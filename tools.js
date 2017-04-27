@@ -22,8 +22,7 @@ var elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
 	return el
 }
 
-var range = (start, end, step = 1) =>
-{
+var range = (start, end, step = 1) => {
 	let result = []
 
 	// in case of one argument, 
@@ -46,7 +45,7 @@ var flatten = array =>
 			flatten (child) :
 			child
 		), []
-)
+	)
 
 var flipObj = obj =>
 	O.keys(obj).reduce ((acc, key) =>
