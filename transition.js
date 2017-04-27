@@ -1,9 +1,9 @@
 'use strict'
 
 class Rule {
-	constructor ({radix, neighbors}, seed) {
+	constructor ({radix, neighbors, ruleNum}) {
 		this.radix = radix
-		this.seed = seed
+		this.ruleNum = ruleNum
 		this.neighbors = neighbors
 	}
 
@@ -17,14 +17,14 @@ class Rule {
 	}
 
 	step (input, index) {
-		return this.lookup (Number.parseInt (
+		return this.lookup (N.parseInt (
 			input.slice(index, index + this.neighbors),
 			this.radix
 	))}
 
 	lookup (index) {
 		return 0 |
-		mod((this.seed / Math.pow(this.radix, index)), this.radix)
+		mod((this.ruleNum / Math.pow(this.radix, index)), this.radix)
 }}
 
 var rule110 = new Rule (2, 3, 110) 
