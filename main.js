@@ -17,23 +17,23 @@ window.onhashchange = _ => {
 
 var updateNav = config => {
 	const {page} = config
-	d.getElementById("prev").setAttribute("href",
+	d.getElementById('prev').setAttribute('href',
 	toUri (O.assign({}, config, {page: page - 1})))
-	d.getElementById("next").setAttribute("href",
+	d.getElementById('next').setAttribute('href',
 	toUri (O.assign({}, config, {page: page + 1})))
 }
 
 var setDefaults = config =>
-	O.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: "ts6"}, config)
+	O.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'}, config)
 
 var makeAll = config => {
-	removeAll(["canvas", "svg"])
+	removeAll(['canvas', 'svg'])
 	let {neighbors, radix, start, end, page, amount, seed, render} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
 	let count = start;
 	do {
-		const el = (render == "svg" ? displaySvg : displayCanvas)(rollout (seedGen(seed), new Rule(radix,neighbors,count)), config, count)
+		const el = (render == 'svg' ? displaySvg : displayCanvas)(rollout (seedGen(seed), new Rule(radix,neighbors,count)), config, count)
 		d.body.appendChild(el)
 	} while (++ count < end)
 }

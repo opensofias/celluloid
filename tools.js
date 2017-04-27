@@ -26,7 +26,7 @@ var range = (start, end, step = 1) => {
 	let result = []
 
 	// in case of one argument, 
-	typeof end == "undefined" &&
+	typeof end == 'undefined' &&
 		([start, end] = [0, start -1])
 
 	do {

@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 let mod = (x, y) => (x % y + y) % y
 
@@ -10,7 +10,7 @@ class Rule {
 	}
 
 	transform (input) {
-		let result = ""
+		let result = ''
 		let count = 0
 		while (count + this.neighbors <= input.length)
 		 result += this.step (input, count ++).toString (this.radix)
