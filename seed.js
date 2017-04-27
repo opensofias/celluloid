@@ -22,5 +22,5 @@ var seedGen = string => {
 	const [kind, param]
 	= [seedLib[string.slice (0, 2)], string.slice (2)]
 	if (kind) return repeatedReplace (param, ...kind)
-	else return repeatedReplace (...param.split('.'))
+	return repeatedReplace (...string.split('.'))
 }
