@@ -1,19 +1,5 @@
 'use strict'
 
-let makeSVG = (tag, attribs = {}, append_to = false) => {
-	let el = d.createElementNS('http://www.w3.org/2000/svg', tag)
-	for (let key in attribs) el.setAttribute (key, attribs[key])
-	append_to && append_to.appendChild(el)
-	return el
-}
-
-let makeElement = (tag, attribs = {}, append_to = false) => {
-	let el = d.createElement(tag)
-	for (let key in attribs) el.setAttribute (key, attribs[key])
-	append_to && append_to.appendChild(el)
-	return el
-}
-
 let hlsColor = lightness =>
 	'hsl(120,100%,' + (100 * lightness | 0) + '%)'
 
@@ -36,18 +22,27 @@ let exportSvg = function () {
 	window.open(url)
 }
 
+const svgContext = svgElem => {
+	element: svgElem,
+	
+
+}
+
 var displayCanvas = (rollout, config, number) => {
-	var {radix, zoom} = config
+	var {radix, zoom, svg} = config
 	zoom = zoom || 2
 
-	const el = makeElement ('canvas', {
-		height: (rollout.length) * zoom,
-		width: (rollout[0].length) * zoom,
-		title: number
-	})
+	const el = elem ({
+		tag: svg ? 'svg' : 'canvas',
+		attr: {
+			height: (rollout.length) * zoom,
+			width: (rollout[0].length) * zoom,
+			title: number
+	}})
 	const ctx = el.getContext('2d')
 
-	el.addEventListener ('click', function (ev){open(this.toDataURL())})
+	el.addEventListener ('click',
+		function (ev) {open (this.toDataURL ())})
 
 	rollout.forEach ((row, rIndex) => {
 		const shift = (rollout[0].length - row.length) / 2
