@@ -19,10 +19,7 @@ const seedLib = {
 }
 
 var seedGen = string => {
-	const [kind, param] = [
-		seedLib[string.slice (0, 2)],
-		string.slice (2)
-	]
-	if (kind) return repeatedReplace (param, ...kind)
-	return repeatedReplace (...string.split('.'))
+	const kind = seedLib [string.slice (0, 2)]
+	if (kind) return repeatedReplace (param, ...string.slice (2))
+	return repeatedReplace (...string.split ('.'))
 }
