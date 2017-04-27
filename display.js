@@ -53,7 +53,7 @@ var displayCanvas = (rollout, config, number) => {
 		row.forEach ((symbol, cIndex) => {
 			if (symbol == prevSymbol) streak ++
 			else if (streak) {
-				ctx.fillStyle = hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
+				ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
 				ctx.fillRect (
 					(shift + cIndex - streak) * zoom,
 					rIndex * zoom,
@@ -63,7 +63,7 @@ var displayCanvas = (rollout, config, number) => {
 				prevSymbol = symbol
 				streak = 1
 		}})
-		ctx.fillStyle = hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
+		ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
 		ctx.fillRect (
 			(row.length + shift - streak) * zoom,
 			rIndex * zoom,
@@ -88,7 +88,7 @@ var displaySvg = (rollout, config, number) => {
 
 	el.addEventListener('click', exportSvg)
 	
-	if (Number.isInteger(number)) {
+	if (N.isInteger(number)) {
 		const title = makeSVG ('title')
 		title.innerHTML = number
 		el.appendChild(title)
@@ -106,7 +106,7 @@ var displaySvg = (rollout, config, number) => {
 					y: rIndex * zoom,
 					height: zoom,
 					width: zoom * streak,
-					fill: hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
+					fill: hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
 				}))
 				prevSymbol = symbol
 				streak = 1
@@ -116,7 +116,7 @@ var displaySvg = (rollout, config, number) => {
 			y: rIndex * zoom,
 			height: zoom,
 			width: zoom * streak,
-			fill: hexColor(Number.parseInt(prevSymbol, radix) / (radix - 1))
+			fill: hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
 	}))})
 	return el
 }

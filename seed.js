@@ -1,7 +1,7 @@
 'use strict'
 
 const repStep = (prev, array) =>
-	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
+	prev.split ('').map (s => array[N.parseInt(s)] || '').join ('')
 
 const recurTimes = (fun, times, step, ...params) => {
 	while (times -- > 0) step = fun(step, ...params)
@@ -9,7 +9,7 @@ const recurTimes = (fun, times, step, ...params) => {
 }
 
 const repeatedReplace = (iterations, first, ...lookup) =>
-	recurTimes (repStep, Number.parseInt(iterations), first, lookup)
+	recurTimes (repStep, N.parseInt(iterations), first, lookup)
 
 const seedLib = {
 	tm: ['0', '01', '10'],

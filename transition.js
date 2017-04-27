@@ -17,7 +17,7 @@ class Rule {
 	}
 
 	step (input, index) {
-		return this.lookup (Number.parseInt (
+		return this.lookup (N.parseInt (
 			input.slice(index, index + this.neighbors),
 			this.radix
 	))}

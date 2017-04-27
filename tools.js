@@ -1,6 +1,6 @@
 'use strict'
 
-var [O, A, d] = [Object, Array, document]
+var [O, A, N, d] = [Object, Array, Number, document]
 
 // using "function" because of Edge bug
 var elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
