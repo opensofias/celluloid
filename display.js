@@ -40,7 +40,8 @@ var render = (rollout, config) => {
 		attr: {
 			height: (rollout.length) * zoom,
 			width: (rollout[0].length) * zoom,
-			title: ruleNum
+			[svg ? 'xmlns' : 'title']:
+				svg ? 'http://www.w3.org/2000/svg' : ruleNum
 		},
 		svg
 	})
@@ -49,7 +50,7 @@ var render = (rollout, config) => {
 
 	el.addEventListener ('click', svg ?
 		function () {
-			let url = 'data:image/svg+xml;charset=utf8,<?xml version=\'1.0\'?>' + this.outerHTML
+			let url = 'data:image/svg+xml;charset=utf8,<?xml version="1.0"?>' + this.outerHTML
 			window.open(url) } :
 		function (ev) {open (this.toDataURL ())}
 	)
