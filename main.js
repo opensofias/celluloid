@@ -28,14 +28,21 @@ var setDefaults = config =>
 
 var makeAll = config => {
 	removeAll(['canvas', 'svg'])
-	let {neighbors, radix, start, end, page, amount, seed, render} = config
+	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
-	let count = start;
+	let ruleNum = start;
 	do {
-		const el = (render == 'svg' ? displaySvg : displayCanvas) (rollout (seedGen (seed), new Rule (config,count)), config, count)
+		const ruleConfig = O.assign(O.create(config), {ruleNum})
+		const el = render (
+			rollout (
+				seedGen (seed),
+				new Rule (ruleConfig)
+			),
+			ruleConfig
+		)
 		d.body.appendChild (el)
-	} while (++ count < end)
+	} while (++ ruleNum < end)
 }
 
 var removeAll = tags =>

@@ -29,13 +29,10 @@ const svgContext = svgElem => ({
 					fill: this.fillStyle
 				},
 				svg: true
-			})
-		)
-	}
-})
+}))}})
 
-var displayCanvas = (rollout, config, number) => {
-	var {radix, zoom, svg} = config
+var render = (rollout, config) => {
+	var {radix, zoom, svg, ruleNum} = config
 	zoom = zoom || 2
 
 	const el = elem ({
@@ -43,7 +40,7 @@ var displayCanvas = (rollout, config, number) => {
 		attr: {
 			height: (rollout.length) * zoom,
 			width: (rollout[0].length) * zoom,
-			title: number
+			title: ruleNum
 		},
 		svg
 	})
