@@ -1,15 +1,15 @@
 'use strict'
 
-var repeatedReplace = (iterations, first, ...lookup) =>
-	recurTimes (repStep, Number.parseInt(iterations), first, lookup)
-
-var repStep = (prev, array) =>
+const repStep = (prev, array) =>
 	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
 
-var recurTimes = (fun, times, step, ...params) => {
+const recurTimes = (fun, times, step, ...params) => {
 	while (times -- > 0) step = fun(step, ...params)
 	return step
 }
+
+const repeatedReplace = (iterations, first, ...lookup) =>
+	recurTimes (repStep, Number.parseInt(iterations), first, lookup)
 
 const seedLib = {
 	tm: ['0', '01', '10'],
