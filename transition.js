@@ -1,7 +1,5 @@
 'use strict'
 
-let mod = (x, y) => (x % y + y) % y
-
 class Rule {
 	constructor ({radix, neighbors}, seed) {
 		this.radix = radix
@@ -15,7 +13,6 @@ class Rule {
 		while (count + this.neighbors <= input.length)
 		 result += this.step (input, count ++).toString (this.radix)
 		
-
 		return result 
 	}
 

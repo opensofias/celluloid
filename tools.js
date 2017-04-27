@@ -51,3 +51,5 @@ var flipObj = obj =>
 	O.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
 	, {})
+
+let mod = (x, y) => (x % y + y) % y
