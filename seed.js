@@ -19,7 +19,7 @@ const seedLib = {
 }
 
 var seedGen = string => {
-	const [kind, param]	= [
+	const [kind, param] = [
 		seedLib[string.slice (0, 2)],
 		string.slice (2)
 	]
