@@ -18,8 +18,7 @@ let twoHex = num => {
 }
 
 const svgContext = svgElem => ({
-	el: svgElem,
-	fillStyle: undefined,
+	el: svgElem, fillStyle: undefined,
 	fillRect (x, y, width, height) {
 		this.el.appendChild(
 			elem ({
@@ -58,6 +57,15 @@ var render = (rollout, config) => {
 	rollout.forEach ((row, rIndex) => {
 		const shift = (rollout[0].length - row.length) / 2
 		row = row.split('')
+
+		ctx.fillStyle = "#000"
+		ctx.fillRect (
+			shift * zoom,
+			rIndex * zoom,
+			zoom * row.length,
+			zoom
+		)
+
 		let prevSymbol = row[0]
 		let streak = 0
 
@@ -65,7 +73,7 @@ var render = (rollout, config) => {
 			if (symbol == prevSymbol) streak ++
 			else if (streak) {
 				ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
-				ctx.fillRect (
+				Number.parseInt(prevSymbol) && ctx.fillRect (
 					(shift + cIndex - streak) * zoom,
 					rIndex * zoom,
 					zoom * streak,
@@ -75,7 +83,7 @@ var render = (rollout, config) => {
 				streak = 1
 		}})
 		ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
-		ctx.fillRect (
+		Number.parseInt(prevSymbol) && ctx.fillRect (
 			(row.length + shift - streak) * zoom,
 			rIndex * zoom,
 			zoom * streak,
