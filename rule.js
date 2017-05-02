@@ -26,3 +26,5 @@ rule.prototype = O.freeze ({
 		return 0 |
 		mod((this.ruleNum / Math.pow(this.radix, index)), this.radix)
 }})
+
+O.freeze (rule)
