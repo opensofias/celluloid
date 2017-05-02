@@ -1,9 +1,6 @@
 'use strict'
 
-let hlsColor = lightness =>
-	'hsl(120,100%,' + (100 * lightness | 0) + '%)'
-
-let hexColor = lightness => {
+const hexColor = lightness => {
 	lightness *= 511
 	const hx = twoHex (lightness % 256)
 	return lightness < 256 ?
@@ -11,13 +8,13 @@ let hexColor = lightness => {
 	'#' + hx + 'FF' + hx
 }
 
-let twoHex = num => {
+const twoHex = num => {
 	let out = (num | 0).toString(16)
 	out.length <= 1 && (out = '0' + out)
 	return out
 }
 
-const svgContext = svgElem => ({
+const svgContext = svgElem => O.freeze({
 	el: svgElem, fillStyle: undefined,
 	fillRect (x, y, width, height) {
 		this.el.appendChild(
@@ -30,9 +27,9 @@ const svgContext = svgElem => ({
 				svg: true
 }))}})
 
-var render = (rollout, config) => {
-	var {radix, zoom, svg, ruleNum} = config
-	zoom = zoom || 2
+const render = (rollout, config) => {
+	const {radix, svg, ruleNum} = config
+	const zoom = config.zoom || 2
 
 	const el = elem ({
 		tag: svg ? 'svg' : 'canvas',
@@ -47,12 +44,12 @@ var render = (rollout, config) => {
 
 	const ctx = svg ? svgContext(el) : el.getContext('2d')
 
-	el.addEventListener ('click', svg ?
+	el.addEventListener ('click',
 		function () {
-			let url = 'data:image/svg+xml;charset=utf8,<?xml version="1.0"?>' + this.outerHTML
-			window.open(url) } :
-		function (ev) {open (this.toDataURL ())}
-	)
+			open (svg ?
+				'data:image/svg+xml;charset=utf8,<?xml version="1.0"?>' + this.outerHTML :
+				this.toDataURL ()
+	)})
 
 	rollout.forEach ((row, rIndex) => {
 		const shift = (rollout[0].length - row.length) / 2
@@ -82,6 +79,7 @@ var render = (rollout, config) => {
 				prevSymbol = symbol
 				streak = 1
 		}})
+
 		ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
 		Number.parseInt(prevSymbol) && ctx.fillRect (
 			(row.length + shift - streak) * zoom,
