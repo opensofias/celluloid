@@ -10,8 +10,7 @@ const hexColor = lightness => {
 
 const twoHex = num => {
 	let out = (num | 0).toString(16)
-	out.length <= 1 && (out = '0' + out)
-	return out
+	return out.length <= 1 ? out : '0' + out
 }
 
 const svgContext = svgElem => O.freeze({
