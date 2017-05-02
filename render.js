@@ -68,8 +68,8 @@ const render = (rollout, config) => {
 
 		row.forEach ((symbol, cIndex) => {
 			if (symbol == prevSymbol) streak ++
-			else if (streak) {
-				ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
+			else {
+				ctx.fillStyle = hexColor (N.parseInt (prevSymbol, radix) / (radix - 1))
 				Number.parseInt(prevSymbol) && ctx.fillRect (
 					(shift + cIndex - streak) * zoom,
 					rIndex * zoom,
@@ -80,7 +80,7 @@ const render = (rollout, config) => {
 				streak = 1
 		}})
 
-		ctx.fillStyle = hexColor(N.parseInt(prevSymbol, radix) / (radix - 1))
+		ctx.fillStyle = hexColor (N.parseInt (prevSymbol, radix) / (radix - 1))
 		Number.parseInt(prevSymbol) && ctx.fillRect (
 			(row.length + shift - streak) * zoom,
 			rIndex * zoom,
