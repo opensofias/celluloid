@@ -1,4 +1,4 @@
-var rollout = (sequence, rule) => {
+const rollout = (sequence, rule) => {
 	let result = [sequence]
 	do {
 		sequence = rule.transform(sequence)
@@ -10,12 +10,12 @@ var rollout = (sequence, rule) => {
 window.onhashchange = _ => {
 	location.hash.length <= 1 &&
 		(location.hash = toUri (setDefaults({})))
-	const uriObj = fromUri (location.hash)
+	const uriObj = O.freeze (fromUri (location.hash))
 	updateNav (uriObj)
 	makeAll (uriObj)
 }
 
-var updateNav = config => {
+const updateNav = config => {
 	const {page} = config
 	d.getElementById('prev').setAttribute('href',
 	toUri (O.assign({}, config, {page: page - 1})))
@@ -23,21 +23,22 @@ var updateNav = config => {
 	toUri (O.assign({}, config, {page: page + 1})))
 }
 
-var setDefaults = config =>
+const setDefaults = config =>
 	O.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'}, config)
 
-var makeAll = config => {
+const makeAll = config => {
 	removeAll(['canvas', 'svg'])
 	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
+	const computedSeed = seedGen (seed)
 	let ruleNum = start;
 	do {
 		const ruleConfig = O.assign(O.create(config), {ruleNum})
 		const el = render (
 			rollout (
-				seedGen (seed),
-				new Rule (ruleConfig)
+				computedSeed,
+				rule (ruleConfig)
 			),
 			ruleConfig
 		)
@@ -45,7 +46,7 @@ var makeAll = config => {
 	} while (++ ruleNum < end)
 }
 
-var removeAll = tags =>
+const removeAll = tags =>
 	tags.forEach(tag =>
 		Array.from(d.body.getElementsByTagName(tag))
 		.forEach (el => d.body.removeChild(el))

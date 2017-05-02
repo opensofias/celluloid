@@ -2,24 +2,21 @@
 
 //uri-friendly json notation
 
-var toUriMap = {
+const toUriMap = O.freeze ({
 	',"':',',
 	'":':':',
 	'"':"'"
-}
+})
 
-var fromUriMap = {}
-for (let key in toUriMap) fromUriMap[toUriMap[key]] = key
-
-var fromUriMap2 =
+const fromUriMap2 = O.freeze (
 	O.entries(toUriMap)
 	.reduce ((acc, k_v) => 
 			{acc[k_v[1]] = k_v[0]; return acc}
 		, {}
-	)
+	))
 
 
-var toUri = obj =>
+const toUri = obj =>
 	'#' + encodeURI (
 		JSON.stringify(obj)
 		.slice(2,-1)
@@ -28,7 +25,7 @@ var toUri = obj =>
 		.split('"').join("'")
 	)
 
-var fromUri = uriString =>
+const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
 	JSON.parse (
 		'{"' +
@@ -39,7 +36,7 @@ var fromUri = uriString =>
 		+ '}'
 	)
 
-var replaceInString = (string, replaceMap) =>
+const replaceInString = (string, replaceMap) =>
 	O.entries(replaceMap).reduce (
 		(acc, val) => acc.split(val[0]).join(val[1]),
 		string
