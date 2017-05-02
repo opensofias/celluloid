@@ -1,14 +1,14 @@
 'use strict'
 
-var [O, A, N, d] = [Object, Array, Number, document]
+const [O, A, N, d] = [Object, Array, Number, document].map(x => Object.freeze(x))
 
 // using "function" because of Edge bug
-var elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
-	var el = svg ?
+const elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
+	const el = svg ?
 		d.createElementNS ('http://www.w3.org/2000/svg', tag) :
 		d.createElement (tag)
 
-	for (var name in attr) el.setAttribute(name, attr[name])
+	for (const name in attr) el.setAttribute(name, attr[name])
 
 	! {
 		string: _ => el.innerText = content,
@@ -22,7 +22,7 @@ var elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
 	return el
 }
 
-var range = (start, end, step = 1) => {
+const range = (start, end, step = 1) => {
 	let result = []
 
 	// in case of one argument, 
@@ -38,7 +38,7 @@ var range = (start, end, step = 1) => {
 	return result
 }
 
-var flatten = array =>
+const flatten = array =>
 	array.reduce ((acc, child) =>
 		acc.concat (
 			A.isArray (child) ?
@@ -47,9 +47,9 @@ var flatten = array =>
 		), []
 	)
 
-var flipObj = obj =>
+const flipObj = obj =>
 	O.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
 	, {})
 
-let mod = (x, y) => (x % y + y) % y
+const mod = (x, y) => (x % y + y) % y

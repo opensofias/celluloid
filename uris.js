@@ -2,44 +2,35 @@
 
 //uri-friendly json notation
 
-var toUriMap = {
-	',"':',',
-	'":':':',
-	'"':"'"
-}
+const uriMap =
+	{to: O.freeze ({
+		',"':',',
+		'":':':',
+		'"':"'"
+})}
 
-var fromUriMap = {}
-for (let key in toUriMap) fromUriMap[toUriMap[key]] = key
-
-var fromUriMap2 =
-	O.entries(toUriMap)
-	.reduce ((acc, k_v) => 
-			{acc[k_v[1]] = k_v[0]; return acc}
-		, {}
+uriMap.from = O.freeze (
+	flipObj (uriMap.to)
 	)
 
-
-var toUri = obj =>
+const toUri = obj =>
 	'#' + encodeURI (
-		JSON.stringify(obj)
-		.slice(2,-1)
-		.split(',"').join(',')
-		.split('":').join(':')
-		.split('"').join("'")
+		replaceInString (
+			JSON.stringify(obj)
+			.slice(2,-1),
+			uriMap.to
+		)
 	)
 
-var fromUri = uriString =>
+const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
 	JSON.parse (
 		'{"' +
-		decodeURI(uriString.slice(1))
-		.split("'").join('"')
-		.split(',').join(',"')
-		.split(':').join('":')
-		+ '}'
+		replaceInString (decodeURI(uriString.slice(1)), uriMap.from) +
+		'}'
 	)
 
-var replaceInString = (string, replaceMap) =>
+const replaceInString = (string, replaceMap) =>
 	O.entries(replaceMap).reduce (
 		(acc, val) => acc.split(val[0]).join(val[1]),
 		string

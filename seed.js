@@ -11,14 +11,14 @@ const recurTimes = (fun, times, step, ...params) => {
 const repeatedReplace = (iterations, first, ...lookup) =>
 	recurTimes (repStep, N.parseInt(iterations), first, lookup)
 
-const seedLib = {
+const seedLib = O.freeze ({
 	tm: ['0', '01', '10'],
 	rb: ['0', '1', '10'],
 	cr: ['010', '00', '1'],
 	ts: ['01', '00', '11'],
-}
+})
 
-var seedGen = string => {
+const seedGen = string => {
 	const kind = seedLib [string.slice (0, 2)]
 	if (kind) return repeatedReplace (string.slice (2), ...kind)
 	return repeatedReplace (...string.split ('.'))
