@@ -24,11 +24,11 @@ const toUri = obj =>
 
 const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
-	JSON.parse (
+	O.freeze (JSON.parse (
 		'{"' +
 		replaceInString (decodeURI(uriString.slice(1)), uriMap.from) +
 		'}'
-	)
+	))
 
 const replaceInString = (string, replaceMap) =>
 	O.entries(replaceMap).reduce (

@@ -10,7 +10,7 @@ const rollout = (sequence, rule) => {
 window.onhashchange = _ => {
 	location.hash.length <= 1 &&
 		(location.hash = toUri (setDefaults({})))
-	const uriObj = O.freeze (fromUri (location.hash))
+	const uriObj = fromUri (location.hash)
 	updateNav (uriObj)
 	makeAll (uriObj)
 }
