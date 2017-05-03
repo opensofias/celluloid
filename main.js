@@ -7,7 +7,7 @@ const rollout = (sequence, rule) => {
 	return result
 }
 
-window.onhashchange = _ => {
+window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
 		(location.hash = toUri (setDefaults({})))
 	const uriObj = fromUri (location.hash)
