@@ -1,11 +1,4 @@
-const rollout = (sequence, rule) => {
-	let result = [sequence]
-	do {
-		sequence = rule.transform(sequence)
-		result.push (sequence)
-	} while (sequence.length >= rule.neighbors)
-	return result
-}
+worker = Worker(worker.js)
 
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
