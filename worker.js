@@ -4,13 +4,13 @@ const [O, A, N] = [Object, Array, Number].map(x => Object.freeze(x))
 
 let currentConfig
 
-self.onmessage = ({message}) =>
-	typeof message == 'object' ?
-		(currentConfig = message) :
+self.onmessage = ({data}) =>
+	typeof data == 'object' ?
+		(currentConfig = data) :
 		self.postMessage (
 			rollout (currentConfig.sequence, rule (
 				O.assign(O.create(
-					currentConfig), {ruleNum : message}
+					currentConfig), {ruleNum : data}
 		))))
 
 const rollout = (sequence, rule) => {

@@ -1,5 +1,7 @@
 worker = Worker(worker.js)
 
+worker.onmessage = ({})
+
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
 		(location.hash = toUri (setDefaults({})))
