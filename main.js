@@ -1,6 +1,7 @@
 worker = Worker(worker.js)
 
-worker.onmessage = ({})
+
+
 
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
@@ -27,6 +28,7 @@ const makeAll = config => {
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
 	const computedSeed = seedGen (seed)
+
 	let ruleNum = start;
 	do {
 		const ruleConfig = O.assign(O.create(config), {ruleNum})
@@ -38,7 +40,19 @@ const makeAll = config => {
 			ruleConfig
 		)
 		d.body.appendChild (el)
-	} while (++ ruleNum < end)
+
+	
+	const status = Object.seal({worker: 0, render: 0})
+
+	const rolloutQueue = []
+
+	worker.onmessage = ({data}) => {
+		rolloutQueue.pop (data)
+		rolloutQueue.length < 4 &&
+		ruleNum < end &&
+		worker.postMessage (ruleNum ++)
+
+	}
 }
 
 const removeAll = tags =>
