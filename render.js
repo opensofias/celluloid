@@ -27,6 +27,12 @@ const svgContext = svgElem => O.freeze({
 				svg: true
 }))}})
 
+const renderPyramid = ({zoom, neighbors}, width) => 
+	elem ({
+		tag : 'path'
+		 
+	})
+
 const render = (rollout, config) => {
 	const {radix, svg, ruleNum} = config
 	const zoom = config.zoom || 2
