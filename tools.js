@@ -10,7 +10,7 @@ const elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
 
 	for (const name in attr) el.setAttribute(name, attr[name])
 
-	! {
+	void {
 		string: _ => el.innerText = content,
 		number: _ => el.innerText = content.toString(),
 		undefined: _ => 0,
