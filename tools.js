@@ -1,6 +1,6 @@
 'use strict'
 
-const [O, A, N, d] = [Object, Array, Number, document].map(x => Object.freeze(x))
+const [O, A, N, d] = [Object, Array, Number, document]
 
 // using "function" because of Edge bug
 const elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
