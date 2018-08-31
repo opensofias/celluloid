@@ -14,7 +14,7 @@ const twoHex = num => {
 	return out
 }
 
-const svgContext = svgElem => O.freeze({
+const svgContext = svgElem => ({
 	el: svgElem, fillStyle: undefined,
 	fillRect (x, y, width, height) {
 		this.el.appendChild(
