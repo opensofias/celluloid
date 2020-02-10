@@ -31,7 +31,7 @@ const makeAll = config => {
 	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
-	const computedSeed = seedGen (seed)
+	const computedSeed = generateSeed (seed)
 	let ruleNum = start;
 	do {
 		const ruleConfig = O.assign(O.create(config), {ruleNum})
