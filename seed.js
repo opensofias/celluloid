@@ -20,7 +20,22 @@ const seedLibrary = O.freeze ({
 })
 
 const generateSeed = string => {
-	const kind = seedLibrary [string.slice (0, 2)]
-	if (kind) return repeatedReplace (string.slice (2), ...kind)
-	return repeatedReplace (...string.split ('.'))
+	if (seedFunctions [string.slice (0, 2)])
+	return seedFunctions [string.slice (0, 2)] (string.slice (2))
+	else { 
+		const kind = seedLibrary [string.slice (0, 2)]
+		if (kind) return repeatedReplace (string.slice (2), ...kind)
+		else return repeatedReplace (...string.split ('.'))
+	} // todo: disuglify this
+}
+
+// todo: merge seedLibrary into this
+const seedFunctions = {
+	dc (iterations) { // dragon curve sequence
+		let strings = ['', '']
+		while (iterations -- > 0) {
+			strings = [strings.join ('1'), strings.join ('0')]
+		}
+		return strings [0]
+	}
 }
