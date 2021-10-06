@@ -37,5 +37,20 @@ const seedFunctions = {
 			strings = [strings.join ('1'), strings.join ('0')]
 		}
 		return strings [0]
+	},
+	kk (iterations) { // kolakosky series mod 2
+		const seed = [1,2]
+		const length = seed.length
+		prev = seed
+		while (iterations -- > 0) {
+			let next = []
+			prev.forEach((repetitions, idx) => {
+				while (repetitions -- > 0) {
+					next = [...next, seed [idx % length]]
+				}
+			})
+			prev = next
+		}
+		return prev.map(x => x % 2).join('')
 	}
 }
