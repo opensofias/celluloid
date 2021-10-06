@@ -17,14 +17,14 @@ window.onload = window.onhashchange = _ => {
 
 const updateNav = config => {
 	const {page} = config
-	d.getElementById('prev').setAttribute('href',
-	toUri (O.assign({}, config, {page: page - 1})))
-	d.getElementById('next').setAttribute('href',
-	toUri (O.assign({}, config, {page: page + 1})))
+	document.getElementById('prev').setAttribute('href',
+	toUri (Object.assign({}, config, {page: page - 1})))
+	document.getElementById('next').setAttribute('href',
+	toUri (Object.assign({}, config, {page: page + 1})))
 }
 
 const setDefaults = config =>
-	O.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'}, config)
+	Object.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'}, config)
 
 const makeAll = config => {
 	removeAll(['canvas', 'svg'])
@@ -34,7 +34,7 @@ const makeAll = config => {
 	const computedSeed = generateSeed (seed)
 	let ruleNum = start;
 	do {
-		const ruleConfig = O.assign(O.create(config), {ruleNum})
+		const ruleConfig = Object.assign(Object.create(config), {ruleNum})
 		const el = render (
 			rollout (
 				computedSeed,
@@ -42,12 +42,12 @@ const makeAll = config => {
 			),
 			ruleConfig
 		)
-		d.body.appendChild (el)
+		document.body.appendChild (el)
 	} while (++ ruleNum < end)
 }
 
 const removeAll = tags =>
 	tags.forEach(tag =>
-		Array.from(d.body.getElementsByTagName(tag))
-		.forEach (el => d.body.removeChild(el))
+		Array.from(document.body.getElementsByTagName(tag))
+		.forEach (el => document.body.removeChild(el))
 	)

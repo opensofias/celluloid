@@ -1,12 +1,12 @@
 'use strict'
 
 const rule = ({radix, neighbors, ruleNum}) =>
-	O.freeze (O.assign (
-		O.create (rule.prototype),
+	Object.freeze (Object.assign (
+		Object.create (rule.prototype),
 		{radix, neighbors, ruleNum}
 	))
 
-rule.prototype = O.freeze ({
+rule.prototype = Object.freeze ({
 	transform (input) {
 		let result = ''
 		let count = 0
@@ -17,7 +17,7 @@ rule.prototype = O.freeze ({
 	},
 
 	step (input, index) {
-		return this.lookup (N.parseInt (
+		return this.lookup (Number.parseInt (
 			input.slice(index, index + this.neighbors),
 			this.radix
 	))},
@@ -27,4 +27,4 @@ rule.prototype = O.freeze ({
 		mod((this.ruleNum / Math.pow(this.radix, index)), this.radix)
 }})
 
-O.freeze (rule)
+Object.freeze (rule)

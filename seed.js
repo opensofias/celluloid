@@ -1,7 +1,7 @@
 'use strict'
 
 const replacementStep = (prev, array) =>
-	prev.split ('').map (s => array[N.parseInt(s)] || '').join ('')
+	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
 
 const recurTimes = (fun, times, step, ...params) => {
 	while (times -- > 0) step = fun(step, ...params)
@@ -9,10 +9,10 @@ const recurTimes = (fun, times, step, ...params) => {
 }
 
 const repeatedReplace = (iterations, first, ...lookup) =>
-	recurTimes (replacementStep, N.parseInt(iterations), first, lookup)
+	recurTimes (replacementStep, Number.parseInt(iterations), first, lookup)
 
 // initial value followed by lookup table
-const seedLibrary = O.freeze ({
+const seedLibrary = Object.freeze ({
 	tm: ['0', '01', '10'],	// Thue-Morse sequence
 	rb: ['0', '1', '10'],	// rabbit sequence
 	cr: ['010', '00', '1'],	// core (single 1 surrounded by 0s)

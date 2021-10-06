@@ -1,25 +1,23 @@
 'use strict'
 
-const [O, A, N, d] = [Object, Array, Number, document]
-
 // using "function" because of Edge bug
 const elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
-	const el = svg ?
-		d.createElementNS ('http://www.w3.org/2000/svg', tag) :
-		d.createElement (tag)
+	const result = svg ?
+		document.createElementNS ('http://www.w3.org/2000/svg', tag) :
+		document.createElement (tag)
 
-	for (const name in attr) el.setAttribute(name, attr[name])
+	for (const name in attr) result.setAttribute(name, attr[name])
 
 	void {
-		string: _ => el.innerText = content,
-		number: _ => el.innerText = content.toString(),
+		string: _ => result.innerText = content,
+		number: _ => result.innerText = content.toString(),
 		undefined: _ => 0,
 		object: _ => content instanceof Array ?
-			content.forEach(contEl => el.appendChild(contEl)) :
-			el.appendChild(content)
+			content.forEach(contEl => result.appendChild(contEl)) :
+			result.appendChild(content)
 	} [typeof content] ()
 
-	return el
+	return result
 }
 
 const range = (start, end, step = 1) => {
@@ -41,14 +39,14 @@ const range = (start, end, step = 1) => {
 const flatten = array =>
 	array.reduce ((acc, child) =>
 		acc.concat (
-			A.isArray (child) ?
+			Array.isArray (child) ?
 			flatten (child) :
 			child
 		), []
 	)
 
 const flipObj = obj =>
-	O.keys(obj).reduce ((acc, key) =>
+	Object.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
 	, {})
 
