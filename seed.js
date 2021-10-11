@@ -19,13 +19,13 @@ const seedLibrary = Object.freeze ({
 	ts: ['01', '00', '11'], // transition (0 on one side, ones at the other)
 })
 
-const generateSeed = string => {
-	if (seedFunctions [string.slice (0, 2)])
-	return seedFunctions [string.slice (0, 2)] (string.slice (2))
+const generateSeed = seedCode => {
+	if (seedFunctions [seedCode.slice (0, 2)])
+	return seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
 	else { 
-		const kind = seedLibrary [string.slice (0, 2)]
-		if (kind) return repeatedReplace (string.slice (2), ...kind)
-		else return repeatedReplace (...string.split ('.'))
+		const kind = seedLibrary [seedCode.slice (0, 2)]
+		if (kind) return repeatedReplace (seedCode.slice (2), ...kind)
+		else return repeatedReplace (...seedCode.split ('.'))
 	} // todo: disuglify this
 }
 
