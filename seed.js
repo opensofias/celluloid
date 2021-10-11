@@ -8,29 +8,21 @@ const recurTimes = (fun, times, step, ...params) => {
 	return step
 }
 
-const repeatedReplace = (iterations, first, ...lookup) =>
+const repeatedReplace = (first, ...lookup) => iterations =>
 	recurTimes (replacementStep, Number.parseInt(iterations), first, lookup)
-
-// initial value followed by lookup table
-const seedLibrary = Object.freeze ({
-	tm: ['0', '01', '10'],	// Thue-Morse sequence
-	rb: ['0', '1', '10'],	// rabbit sequence
-	cr: ['010', '00', '1'],	// core (single 1 surrounded by 0s)
-	ts: ['01', '00', '11'], // transition (0 on one side, ones at the other)
-})
 
 const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
 	return seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
-	else { 
-		const kind = seedLibrary [seedCode.slice (0, 2)]
-		if (kind) return repeatedReplace (seedCode.slice (2), ...kind)
-		else return repeatedReplace (...seedCode.split ('.'))
-	} // todo: disuglify this
+	else throw "invalid seed code: " + seedCode
 }
 
-// todo: merge seedLibrary into this
+// todo: reintroduce custom repeatedReplace functions, more parameterized seeds in general would be nice
 const seedFunctions = {
+	tm: repeatedReplace ('0', '01', '10'), // Thue-Morse sequence
+	rb: repeatedReplace ('0', '1', '10'), // rabbit sequence
+	cr: repeatedReplace ('010', '00', '1'), // core (single 1 surrounded by 0s)
+	ts: repeatedReplace ('01', '00', '11'), // transition (0 on one side, ones at the other)
 	dc (iterations) { // dragon curve sequence
 		let strings = ['', '']
 		while (iterations -- > 0) {
