@@ -41,7 +41,7 @@ const seedFunctions = {
 	kk (iterations) { // kolakosky series mod 2
 		const seed = [1,2]
 		const length = seed.length
-		prev = seed
+		let prev = seed
 		while (iterations -- > 0) {
 			let next = []
 			prev.forEach((repetitions, idx) => {
