@@ -1,15 +1,15 @@
 'use strict'
 
-const replacementStep = (prev, array) =>
+const substitutionStep = (prev, array) =>
 	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
 
-const recurTimes = (fun, times, step, ...params) => {
+const repeatLoop = (fun, times, step, ...params) => {
 	while (times -- > 0) step = fun(step, ...params)
 	return step
 }
 
-const repeatedReplace = (first, ...lookup) => iterations =>
-	recurTimes (replacementStep, Number.parseInt(iterations), first, lookup)
+const repeatedSubstitution = (first, ...lookup) => iterations =>
+	repeatLoop (substitutionStep, Number.parseInt(iterations), first, lookup)
 
 const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
@@ -17,12 +17,12 @@ const generateSeed = seedCode => {
 	else throw "invalid seed code: " + seedCode
 }
 
-// todo: reintroduce custom repeatedReplace functions, more parameterized seeds in general would be nice
+// todo: reintroduce custom repeatedSubstitution functions, more parameterized seeds in general would be nice
 const seedFunctions = {
-	tm: repeatedReplace ('0', '01', '10'), // Thue-Morse sequence
-	rb: repeatedReplace ('0', '1', '10'), // rabbit sequence
-	cr: repeatedReplace ('010', '00', '1'), // core (single 1 surrounded by 0s)
-	ts: repeatedReplace ('01', '00', '11'), // transition (0 on one side, ones at the other)
+	tm: repeatedSubstitution ('0', '01', '10'), // Thue-Morse sequence
+	rb: repeatedSubstitution ('0', '1', '10'), // rabbit sequence
+	cr: repeatedSubstitution ('010', '00', '1'), // core (single 1 surrounded by 0s)
+	ts: repeatedSubstitution ('01', '00', '11'), // transition (0 on one side, ones at the other)
 	dc (iterations) { // dragon curve sequence
 		let strings = ['', '']
 		while (iterations -- > 0) {
