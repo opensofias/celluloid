@@ -1,7 +1,6 @@
 'use strict'
 
-// using "function" because of Edge bug
-const elem = function ({tag = 'div', attr = {}, content = [], svg = false}) {
+const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 	const result = svg ?
 		document.createElementNS ('http://www.w3.org/2000/svg', tag) :
 		document.createElement (tag)
