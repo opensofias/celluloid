@@ -1,10 +1,9 @@
 'use strict'
 
 const rule = ({radix, neighbors, ruleNum}) =>
-	Object.freeze (Object.assign (
-		Object.create (rule.prototype),
-		{radix, neighbors, ruleNum}
-	))
+	Object.freeze ({
+		radix, neighbors, ruleNum, __proto__:rule.prototype
+	})
 
 rule.prototype = Object.freeze ({
 	transform (input) {
@@ -26,5 +25,3 @@ rule.prototype = Object.freeze ({
 		return 0 |
 		mod((this.ruleNum / Math.pow(this.radix, index)), this.radix)
 }})
-
-Object.freeze (rule)
