@@ -16,7 +16,7 @@ const generateSeed = seedCode => {
 	else throw "invalid seed code: " + seedCode
 }
 
-// todo: reintroduce custom repeatedSubstitution functions, more parameterized seeds in general would be nice
+// todo: more parameterized seeds in general would be nice
 const seedFunctions = {
 	tm: repeatedSubstitution ('0', '01', '10'), // Thue-Morse sequence
 	rb: repeatedSubstitution ('0', '1', '10'), // rabbit sequence
