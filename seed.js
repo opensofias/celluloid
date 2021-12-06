@@ -3,13 +3,12 @@
 const substitutionStep = (prev, array) =>
 	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
 
-const repeatLoop = (fun, times, step, ...params) => {
-	while (times -- > 0) step = fun(step, ...params)
-	return step
-}
+const repeatRecursive = (fun, times, prev, ...params) => 
+	times <= 0 ? prev :
+		repeatRecursive (fun, times - 1, fun (prev, ...params), ...params)
 
 const repeatedSubstitution = (first, ...lookup) => iterations =>
-	repeatLoop (substitutionStep, Number.parseInt(iterations), first, lookup)
+	repeatRecursive (substitutionStep, Number.parseInt(iterations), first, lookup)
 
 const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
