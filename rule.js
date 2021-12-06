@@ -1,10 +1,13 @@
 'use strict'
 
+//todo: this whole object-malarky should be avoidable by using modules 
+
 const rule = ({radix, neighbors, ruleNum}) =>
 	Object.freeze ({
 		radix, neighbors, ruleNum, __proto__:rule.prototype
 	})
 
+// todo: use TypedArrays instead of strings for speedup
 rule.prototype = Object.freeze ({
 	transform (input) {
 		let result = ''
