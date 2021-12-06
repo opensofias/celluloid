@@ -1,14 +1,14 @@
 'use strict'
 
-const substitutionStep = (prev, array) =>
+const substitute = (prev, array) =>
 	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
 
-const repeatRecursive = (fun, times, prev, ...params) => 
+const repeat = (fun, times, prev, ...params) => 
 	times <= 0 ? prev :
-		repeatRecursive (fun, times - 1, fun (prev, ...params), ...params)
+		repeat (fun, times - 1, fun (prev, ...params), ...params)
 
 const repeatedSubstitution = (first, ...lookup) => iterations =>
-	repeatRecursive (substitutionStep, Number.parseInt(iterations), first, lookup)
+	repeat (substitute, Number.parseInt(iterations), first, lookup)
 
 const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
