@@ -19,22 +19,6 @@ const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 	return result
 }
 
-const range = (start, end, step = 1) => {
-	let result = []
-
-	// in case of one argument, 
-	typeof end == 'undefined' &&
-		([start, end] = [0, start -1])
-
-	do {
-		result.push (start)
-		start += step
-	} while (start != end)
-	result.push (end)
-	
-	return result
-}
-
 const flipObj = obj =>
 	Object.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
