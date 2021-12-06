@@ -35,15 +35,6 @@ const range = (start, end, step = 1) => {
 	return result
 }
 
-const flatten = array =>
-	array.reduce ((acc, child) =>
-		acc.concat (
-			Array.isArray (child) ?
-			flatten (child) :
-			child
-		), []
-	)
-
 const flipObj = obj =>
 	Object.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
