@@ -19,8 +19,15 @@ const generateSeed = seedCode => {
 const superDragon = (iterations, fillers = ['1', '0'], strings = []) => 
 	iterations <= -1 ? strings : superDragon (
 		iterations - 1, fillers,
-			fillers.map (filler => strings.join(filler))
-		)
+		fillers.map (filler => strings.join(filler))
+	)
+
+const recursiveSubstitution = (iterations, prev, lookup) =>
+	iterations <= 0 ? prev : recursiveSubstitution (
+		iterations - 1,
+		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join (''),
+		lookup
+	)
 
 // todo: more parameterized seeds in general would be nice
 const seedFunctions = {
