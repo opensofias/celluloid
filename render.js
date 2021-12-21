@@ -27,7 +27,7 @@ const svgContext = svgElem => ({
 				svg: true
 }))}})
 
-const render = (rollout, config) => {
+export const render = (rollout, config) => {
 	const {radix, svg, ruleNum} = config
 	const zoom = config.zoom || 2
 
