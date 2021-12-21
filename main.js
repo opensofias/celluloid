@@ -1,6 +1,7 @@
 import { generateSeed } from "./seed.js"
 import { rule } from "./rule.js"
 import { render } from "./render.js"
+import { fromUri, toUri } from "./uris.js"
 
 const rollout = (sequence, rule) => {
 	let result = [sequence]

@@ -1,5 +1,3 @@
-'use strict'
-
 //uri-friendly json notation
 
 const uriMap =
@@ -9,11 +7,9 @@ const uriMap =
 		'"':"'"
 })}
 
-uriMap.from = Object.freeze (
-	flipObj (uriMap.to)
-	)
+uriMap.from = Object.freeze (flipObj (uriMap.to))
 
-const toUri = obj =>
+export const toUri = obj =>
 	'#' + encodeURI (
 		replaceInString (
 			JSON.stringify(obj)
@@ -22,7 +18,7 @@ const toUri = obj =>
 		)
 	)
 
-const fromUri = uriString =>
+export const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
 	Object.freeze (JSON.parse (
 		'{"' +
