@@ -1,8 +1,5 @@
-'use strict'
-
 //todo: this whole object-malarky should be avoidable by using modules 
-
-const rule = ({radix, neighbors, ruleNum}) =>
+export const rule = ({radix, neighbors, ruleNum}) =>
 	Object.freeze ({
 		radix, neighbors, ruleNum, __proto__:rule.prototype
 	})
