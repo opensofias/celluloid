@@ -17,8 +17,8 @@ const generateSeed = seedCode => {
 }
 
 const superDragon = (iterations, fillers = ['1', '0'], strings = []) => 
-	iterations <= -1 ? strings :
-		superDragon (iterations - 1, fillers,
+	iterations <= -1 ? strings : superDragon (
+		iterations - 1, fillers,
 			fillers.map (filler => strings.join(filler))
 		)
 
