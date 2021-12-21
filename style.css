@@ -1,11 +1,11 @@
 html {
 	font-family: 'Source Sans Pro', sans-serif;
-	background-color: #808080;
+	background-color: #639;
 }
 
 div {text-align: center;}
 
-body {margin: 0  0  0 32px;}
+body {margin: 8px 8px 8px 32px;}
 
 nav {
 	position: fixed;
@@ -18,9 +18,9 @@ nav {
 }
 
 nav > a {
-	color: #000;
+	color: #fff;
 	display: block;
-	background-color: #c0c0c0;
+	background-color: #000a;
 	text-align: center;
 	line-height: 0;
 	padding-top: 25vh; 
@@ -29,7 +29,7 @@ nav > a {
 	font-size: 24px;
 }
 
-nav > a:hover {background-color: #e0e0e0;}
+nav > a:hover {background-color: #0005;}
 
 main {
 	display: flex;
