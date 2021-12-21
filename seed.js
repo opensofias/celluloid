@@ -7,8 +7,8 @@ const repeat = (fun, times, prev, ...params) =>
 	times <= 0 ? prev :
 		repeat (fun, times - 1, fun (prev, ...params), ...params)
 
-const repeatedSubstitution = (first, ...lookup) => iterations =>
-	repeat (substitute, Number.parseInt(iterations), first, lookup)
+const repeatedSubstitution = (first, ...lookup) => iter =>
+	repeat (substitute, Number.parseInt(iter), first, lookup)
 
 const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
@@ -16,15 +16,15 @@ const generateSeed = seedCode => {
 	else throw "invalid seed code: " + seedCode
 }
 
-const superDragon = (iterations, fillers = ['1', '0'], strings = []) => 
-	iterations <= -1 ? strings : superDragon (
-		iterations - 1, fillers,
+const superDragon = (iter, fillers = ['1', '0'], strings = []) => 
+	iter <= -1 ? strings : superDragon (
+		iter - 1, fillers,
 		fillers.map (filler => strings.join(filler))
 	)
 
-const recursiveSubstitution = (iterations, prev, lookup) =>
-	iterations <= 0 ? prev : recursiveSubstitution (
-		iterations - 1,
+const recursiveSubstitution = (iter, prev, lookup) =>
+	iter <= 0 ? prev : recursiveSubstitution (
+		iter - 1,
 		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join (''),
 		lookup
 	)
@@ -35,12 +35,12 @@ const seedFunctions = {
 	rb: repeatedSubstitution ('0', '1', '10'), // rabbit sequence
 	cr: repeatedSubstitution ('010', '00', '1'), // core (single 1 surrounded by 0s)
 	ts: repeatedSubstitution ('01', '00', '11'), // transition (0 on one side, ones at the other)
-	dc: iterations => superDragon (iterations) [0],
-	kk: iterations => { // kolakosky series mod 2
+	dc: iter => superDragon (iter) [0],
+	kk: iter => { // kolakosky series mod 2
 		const seed = [1,2]
 		const length = seed.length
 		let prev = seed
-		while (iterations -- > 0) {
+		while (iter -- > 0) {
 			let next = []
 			prev.forEach((repetitions, idx) => {
 				while (repetitions -- > 0) {
