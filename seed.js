@@ -30,10 +30,10 @@ const recursiveSubstitution = (lookup, prev = '0') => iter =>
 
 // todo: more parameterized seeds in general would be nice
 const seedFunctions = {
-	tm: repeatedSubstitution ('0', '01', '10'), // Thue-Morse sequence
-	rb: repeatedSubstitution ('0', '1', '10'), // rabbit sequence
-	cr: repeatedSubstitution ('010', '00', '1'), // core (single 1 surrounded by 0s)
-	ts: repeatedSubstitution ('01', '00', '11'), // transition (0 on one side, ones at the other)
+	tm: recursiveSubstitution (['01', '10']), // Thue-Morse sequence
+	rb: recursiveSubstitution (['1', '10']), // rabbit sequence (aka fibonacci word)
+	cr: recursiveSubstitution (['00', '1'], '010'), // core (single 1 surrounded by 0s)
+	ts: recursiveSubstitution (['00', '11'], '01'), // transition (0 on one side, ones at the other)
 	dc: superDragon (['1', '0']),
 	kk: iter => { // kolakosky series mod 2
 		const seed = [1,2]
