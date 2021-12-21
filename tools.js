@@ -1,6 +1,6 @@
 'use strict'
 
-const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
+export const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 	const result = svg ?
 		document.createElementNS ('http://www.w3.org/2000/svg', tag) :
 		document.createElement (tag)
@@ -19,9 +19,9 @@ const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 	return result
 }
 
-const flipObj = obj =>
+export const flipObj = obj =>
 	Object.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
 	, {})
 
-const mod = (x, y) => (x % y + y) % y
+export const mod = (x, y) => (x % y + y) % y

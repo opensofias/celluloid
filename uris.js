@@ -1,3 +1,5 @@
+import { flipObj } from "./tools.js"
+
 //uri-friendly json notation
 
 const uriMap =

@@ -1,4 +1,4 @@
-'use strict'
+import { elem } from "./tools.js"
 
 const hexColor = lightness => {
 	lightness *= 511

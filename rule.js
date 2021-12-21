@@ -1,3 +1,5 @@
+import { mod } from "./tools.js"
+
 //todo: this whole object-malarky should be avoidable by using modules 
 export const rule = ({radix, neighbors, ruleNum}) =>
 	Object.freeze ({
