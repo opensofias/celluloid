@@ -35,8 +35,8 @@ const seedFunctions = {
 	rb: repeatedSubstitution ('0', '1', '10'), // rabbit sequence
 	cr: repeatedSubstitution ('010', '00', '1'), // core (single 1 surrounded by 0s)
 	ts: repeatedSubstitution ('01', '00', '11'), // transition (0 on one side, ones at the other)
-	dc (iterations) { return superDragon (iterations) [0] },
-	kk (iterations) { // kolakosky series mod 2
+	dc: iterations => superDragon (iterations) [0],
+	kk: iterations => { // kolakosky series mod 2
 		const seed = [1,2]
 		const length = seed.length
 		let prev = seed
