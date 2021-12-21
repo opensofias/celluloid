@@ -16,18 +16,17 @@ const generateSeed = seedCode => {
 	else throw "invalid seed code: " + seedCode
 }
 
-const superDragon = (iter, fillers = ['1', '0'], strings = []) => 
-	iter <= -1 ? strings : superDragon (
-		iter - 1, fillers,
+const superDragon = (fillers = ['1', '0'], strings = []) => iter => 
+	iter <= -1 ? strings [0] : superDragon (
+		fillers,
 		fillers.map (filler => strings.join(filler))
-	)
+	) (iter - 1)
 
-const recursiveSubstitution = (iter, prev, lookup) =>
+const recursiveSubstitution = (lookup, prev = '0') => iter =>
 	iter <= 0 ? prev : recursiveSubstitution (
-		iter - 1,
-		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join (''),
-		lookup
-	)
+		lookup,
+		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join ('')
+	) (iter - 1)
 
 // todo: more parameterized seeds in general would be nice
 const seedFunctions = {
@@ -35,7 +34,7 @@ const seedFunctions = {
 	rb: repeatedSubstitution ('0', '1', '10'), // rabbit sequence
 	cr: repeatedSubstitution ('010', '00', '1'), // core (single 1 surrounded by 0s)
 	ts: repeatedSubstitution ('01', '00', '11'), // transition (0 on one side, ones at the other)
-	dc: iter => superDragon (iter) [0],
+	dc: superDragon (['1', '0']),
 	kk: iter => { // kolakosky series mod 2
 		const seed = [1,2]
 		const length = seed.length
