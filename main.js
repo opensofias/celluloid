@@ -1,4 +1,5 @@
 import { generateSeed } from "./seed.js"
+import { rule } from "./rule.js"
 
 const rollout = (sequence, rule) => {
 	let result = [sequence]
