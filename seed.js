@@ -1,6 +1,4 @@
-'use strict'
-
-const generateSeed = seedCode => {
+export const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
 		return seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
 	else throw "invalid seed code: " + seedCode
