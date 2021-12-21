@@ -1,15 +1,5 @@
 'use strict'
 
-const substitute = (prev, array) =>
-	prev.split ('').map (s => array[Number.parseInt(s)] || '').join ('')
-
-const repeat = (fun, times, prev, ...params) => 
-	times <= 0 ? prev :
-		repeat (fun, times - 1, fun (prev, ...params), ...params)
-
-const repeatedSubstitution = (first, ...lookup) => iter =>
-	repeat (substitute, Number.parseInt(iter), first, lookup)
-
 const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
 	return seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
