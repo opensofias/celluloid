@@ -8,11 +8,7 @@ const hexColor = lightness => {
 	'#' + hx + 'FF' + hx
 }
 
-const twoHex = num => {
-	let out = (num | 0).toString(16)
-	out.length <= 1 && (out = '0' + out)
-	return out
-}
+const twoHex = num => (num | 0).toString(16).padStart (2, '0')
 
 const svgContext = svgElem => ({
 	el: svgElem, fillStyle: undefined,
