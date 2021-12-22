@@ -1,16 +1,7 @@
 import { generateSeed } from "./seed.js"
-import { rule } from "./rule.js"
+import { rollout } from "./rule.js"
 import { render } from "./render.js"
 import { fromUri, toUri } from "./uris.js"
-
-const rollout = (sequence, rule) => {
-	let result = [sequence]
-	do {
-		sequence = rule.transform(sequence)
-		result.push (sequence)
-	} while (sequence.length >= rule.neighbors)
-	return result
-}
 
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
@@ -38,14 +29,11 @@ const makeAll = config => {
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
 	const computedSeed = generateSeed (seed)
 	let ruleNum = start;
+	const rolloutFun = rollout (config) (computedSeed)
 	do {
-		const ruleConfig = Object.assign(Object.create(config), {ruleNum})
 		const el = render (
-			rollout (
-				computedSeed,
-				rule (ruleConfig)
-			),
-			ruleConfig
+			rolloutFun (ruleNum),
+			{ruleNum, __proto__: config}
 		)
 		document.body.appendChild (el)
 	} while (++ ruleNum < end)

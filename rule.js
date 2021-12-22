@@ -1,29 +1,30 @@
 import { mod } from "./tools.js"
 
-//todo: this whole object-malarky should be avoidable by using modules 
-export const rule = ({radix, neighbors, ruleNum}) => ({
-	radix, neighbors, ruleNum,
-	__proto__:rule.prototype
-})
-
 // todo: use TypedArrays instead of strings for speedup
-rule.prototype = {
-	transform (input) {
-		let result = ''
-		let count = 0
-		while (count + this.neighbors <= input.length)
-			result += this.step (input, count ++).toString (this.radix)
-		return result 
-	},
 
-	step (input, index) {
-		return this.lookup (Number.parseInt (
-			input.slice(index, index + this.neighbors),
-			this.radix
-	))},
+export const rollout = config => seed => ruleNum => {
+	let result = [seed]
+	const stepFun = step (config) (buildLUT (config) (ruleNum))
+	do result.push (generation (config) (stepFun) (result [result.length -1]))
+	while (result [result.length -1].length >= config.neighbors)
+	return result
+}
 
-	lookup (index) {
-		return 0 |
-		mod((this.ruleNum / Math.pow(this.radix, index)), this.radix)
-	}
+const step = ({radix, neighbors}) => LUT => (past, index) => 
+	LUT [Number.parseInt (
+		past.slice(index, index + neighbors),
+		radix
+	)]
+
+const buildLUT = ({radix, neighbors}) => ruleNum =>
+	(new Uint8Array (neighbors ** radix)).map ((val, idx) => 
+		(ruleNum / Math.pow(radix, idx)) % radix
+	)
+
+const generation = ({radix, neighbors}) => stepFun => past => {
+	let result = ''
+	let index = 0
+	while (index + neighbors <= past.length)
+		result += stepFun (past, index++).toString (radix)
+	return result 
 }
