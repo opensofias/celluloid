@@ -27,11 +27,12 @@ const recurSubst = (lookup, prev = '0') => iter =>
 		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join ('')
 	) (iter - 1)
 
-const randomDigits = (threshold = .5) => lengthLog2 =>
+const randomDigits = (threshold = .5) => lengthLog2 => (
 	new Array (Math.ceil (2 ** Number.parseFloat (lengthLog2)))
 	.fill (0)
 	.map (() => Math.random () > threshold ? 1 : 0)
-	.join ()
+	.join ('')
+)
 
 // todo: more parameterized seeds in general would be nice
 const seedFunctions = {
