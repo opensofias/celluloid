@@ -12,8 +12,7 @@ rule.prototype = {
 		let result = ''
 		let count = 0
 		while (count + this.neighbors <= input.length)
-		result += this.step (input, count ++).toString (this.radix)
-		
+			result += this.step (input, count ++).toString (this.radix)
 		return result 
 	},
 
