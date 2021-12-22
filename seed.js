@@ -10,19 +10,21 @@ const superDragon = (fillers = ['1', '0'], strings = []) => iter =>
 		fillers.map (filler => strings.join(filler))
 	) (iter - 1)
 
-const superKolakosky = (seed = [1, 2]) => iter => { // kolakosky series mod 2
-	let prev = seed
-	while (iter -- > 0) {
-		let next = []
-		prev.forEach((repetitions, idx) => {
-			while (repetitions -- > 0) {
-				next = [...next, seed [idx % seed.length]]
-			}
-		})
-		prev = next
-	}
-	return prev.map(x => x - 1).join('')
-}
+const superKolakosky = (seed = [1, 2], prev) => iter =>
+	iter <= 0 ? prev || seed : superKolakosky (
+		seed,
+		runAlong (seed, prev || seed)
+	) (iter - 1)
+	
+const runAlong = (seed, prev) => {
+	let result = []
+	prev.forEach((repetitions, idx) => {
+		while (repetitions -- > 0) {
+			result = [...result, seed [idx % seed.length]]
+		}
+	})
+	return result
+} 
 
 const recurSubst = (lookup, prev = '0') => iter =>
 	iter <= 0 ? prev : recurSubst (
@@ -37,5 +39,5 @@ const seedFunctions = {
 	cr: recurSubst (['00', '1'], '010'), // core (single 1 surrounded by 0s)
 	ts: recurSubst (['00', '11'], '01'), // transition (0 on one side, ones at the other)
 	dc: superDragon (['1', '0']),
-	kk: superKolakosky ([1, 2])
+	kk: iter => superKolakosky ([1, 2]) (iter).map (x => x -1).join ('')
 }
