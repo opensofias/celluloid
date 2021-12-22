@@ -23,15 +23,15 @@ const svgContext = svgElem => ({
 				svg: true
 }))}})
 
-export const render = (rollout, config) => {
+export const render = (history, config) => {
 	const {radix, svg, ruleNum} = config
 	const zoom = config.zoom || 2
 
 	const el = elem ({
 		tag: svg ? 'svg' : 'canvas',
 		attr: {
-			height: (rollout.length) * zoom,
-			width: (rollout[0].length) * zoom,
+			height: (history.length) * zoom,
+			width: (history [0].length) * zoom,
 			[svg ? 'xmlns' : 'title']:
 				svg ? 'http://www.w3.org/2000/svg' : ruleNum
 		},
@@ -47,8 +47,8 @@ export const render = (rollout, config) => {
 				this.toDataURL ()
 	)})
 
-	rollout.forEach ((row, rIndex) => {
-		const shift = (rollout[0].length - row.length) / 2
+	history.forEach ((row, rIndex) => {
+		const shift = (history[0].length - row.length) / 2
 		row = row.split('')
 
 		ctx.fillStyle = "#000"
