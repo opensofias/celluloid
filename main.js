@@ -27,9 +27,8 @@ const makeAll = config => {
 	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
-	const computedSeed = generateSeed (seed)
 	let ruleNum = start;
-	const rolloutFun = rollout (config) (computedSeed)
+	const rolloutFun = rollout (config) (generateSeed (seed))
 	do {
 		const el = render (
 			rolloutFun (ruleNum),
