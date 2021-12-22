@@ -15,24 +15,19 @@ const superKolakosky = (seed = [1, 2], prev) => iter =>
 		seed,
 		runAlong (seed, prev || seed)
 	) (iter - 1)
-	
-const runAlong = (seed, prev) => {
-	let result = []
-	prev.forEach((repetitions, idx) => {
-		while (repetitions -- > 0) {
-			result = [...result, seed [idx % seed.length]]
-		}
-	})
-	return result
-} 
 
-const recurSubst = (lookup, prev = '0') => iter =>
+const runAlong = (seed, prev = []) =>
+	prev.map ((repCount, idx) =>
+		new Array (repCount).fill (seed [idx % seed.length])
+	).flat ()
+
+	const recurSubst = (lookup, prev = '0') => iter =>
 	iter <= 0 ? prev : recurSubst (
 		lookup,
 		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join ('')
 	) (iter - 1)
 
-// todo: more parameterized seeds in general would be nice
+	// todo: more parameterized seeds in general would be nice
 const seedFunctions = {
 	tm: recurSubst (['01', '10']), // Thue-Morse sequence
 	rb: recurSubst (['1', '10']), // rabbit sequence (aka fibonacci word)
