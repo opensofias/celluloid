@@ -21,7 +21,7 @@ const runAlong = (seed, prev = []) =>
 		new Array (repCount).fill (seed [idx % seed.length])
 	).flat ()
 
-	const recurSubst = (lookup, prev = '0') => iter =>
+const recurSubst = (lookup, prev = '0') => iter =>
 	iter <= 0 ? prev : recurSubst (
 		lookup,
 		prev.split ('').map (idx => lookup[Number.parseInt(idx)] || '').join ('')
