@@ -3,9 +3,9 @@ import { flipObj } from "./tools.js"
 //uri-friendly json notation
 
 const uriMap = {to: {
-	',"':',',
-	'":':':',
-	'"':"'"
+	',"':'&',
+	'":':'=',
+	'"':"~"
 }}
 
 uriMap.from = flipObj (uriMap.to)
