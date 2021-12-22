@@ -14,7 +14,7 @@ export const toUri = obj =>
 	'#' + encodeURI (
 		replaceInString (
 			JSON.stringify(obj)
-			.slice(2,-1),
+			.slice(2, -1),
 			uriMap.to
 		)
 	)
