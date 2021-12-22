@@ -33,7 +33,7 @@ const randomDigits = (threshold = .5) => lengthLog2 =>
 	.map (() => Math.random () > threshold ? 1 : 0)
 	.join ()
 
-	// todo: more parameterized seeds in general would be nice
+// todo: more parameterized seeds in general would be nice
 const seedFunctions = {
 	tm: recurSubst (['01', '10']), // Thue-Morse sequence
 	rb: recurSubst (['1', '10']), // rabbit sequence (aka fibonacci word)
