@@ -1,5 +1,3 @@
-import { mod } from "./tools.js"
-
 // todo: use TypedArrays instead of strings for speedup
 
 export const rollout = config => seed => ruleNum => {
