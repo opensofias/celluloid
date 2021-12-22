@@ -2,14 +2,13 @@ import { flipObj } from "./tools.js"
 
 //uri-friendly json notation
 
-const uriMap =
-	{to: Object.freeze ({
-		',"':',',
-		'":':':',
-		'"':"'"
-})}
+const uriMap = {
+	',"':',',
+	'":':':',
+	'"':"'"
+}
 
-uriMap.from = Object.freeze (flipObj (uriMap.to))
+uriMap.from = flipObj (uriMap.to)
 
 export const toUri = obj =>
 	'#' + encodeURI (
@@ -22,11 +21,11 @@ export const toUri = obj =>
 
 export const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
-	Object.freeze (JSON.parse (
+	JSON.parse (
 		'{"' +
 		replaceInString (decodeURI(uriString.slice(1)), uriMap.from) +
 		'}'
-	))
+	)
 
 const replaceInString = (string, replaceMap) =>
 	Object.entries(replaceMap).reduce (

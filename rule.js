@@ -1,13 +1,13 @@
 import { mod } from "./tools.js"
 
 //todo: this whole object-malarky should be avoidable by using modules 
-export const rule = ({radix, neighbors, ruleNum}) =>
-	Object.freeze ({
-		radix, neighbors, ruleNum, __proto__:rule.prototype
-	})
+export const rule = ({radix, neighbors, ruleNum}) => ({
+	radix, neighbors, ruleNum,
+	__proto__:rule.prototype
+})
 
 // todo: use TypedArrays instead of strings for speedup
-rule.prototype = Object.freeze ({
+rule.prototype = {
 	transform (input) {
 		let result = ''
 		let count = 0
@@ -26,4 +26,5 @@ rule.prototype = Object.freeze ({
 	lookup (index) {
 		return 0 |
 		mod((this.ruleNum / Math.pow(this.radix, index)), this.radix)
-}})
+	}
+}
