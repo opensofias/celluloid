@@ -21,11 +21,13 @@ export const toUri = obj =>
 
 export const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
-	JSON.parse (
-		'{"' +
-		replaceInString (decodeURI(uriString.slice(1)), uriMap.from) +
-		'}'
-	)
+	JSON.parse ( '{"' + replaceInString (decodeURI(
+		addTerminator ('~') (uriString).slice(1)
+	), uriMap.from) + '}')
+
+const addTerminator = term => uriString =>
+	(uriString.split (term)).length % 2 ?
+	uriString : uriString + term
 
 const replaceInString = (string, replaceMap) =>
 	Object.entries(replaceMap).reduce (
