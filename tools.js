@@ -18,8 +18,3 @@ export const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 
 	return result
 }
-
-export const flipObj = obj =>
-	Object.keys(obj).reduce ((acc, key) =>
-		(acc[obj[key]] = key) && acc
-	, {})
