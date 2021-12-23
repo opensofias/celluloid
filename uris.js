@@ -1,5 +1,10 @@
 //uri-friendly json notation
 
+const flipObj = obj =>
+	Object.keys(obj).reduce ((acc, key) =>
+		(acc[obj[key]] = key) && acc
+	, {})
+
 const uriMap = {to: {
 	',"':'&',
 	'":':'=',
@@ -7,11 +12,6 @@ const uriMap = {to: {
 }}
 
 uriMap.from = flipObj (uriMap.to)
-
-const flipObj = obj =>
-	Object.keys(obj).reduce ((acc, key) =>
-		(acc[obj[key]] = key) && acc
-	, {})
 
 export const toUri = obj =>
 	'#' + encodeURI (
