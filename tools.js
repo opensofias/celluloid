@@ -23,5 +23,3 @@ export const flipObj = obj =>
 	Object.keys(obj).reduce ((acc, key) =>
 		(acc[obj[key]] = key) && acc
 	, {})
-
-export const mod = (x, y) => (x % y + y) % y
