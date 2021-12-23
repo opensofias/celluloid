@@ -26,7 +26,7 @@ const makeAll = config => {
 	removeAll(['canvas', 'svg'])
 	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
-	end = end || amount ? start + amount : Math.pow(radix, Math.pow(radix, neighbors))
+	end = end || amount ? start + amount : radix ** (radix ** neighbors)
 	let ruleNum = start;
 	const rolloutFun = rollout (config) (generateSeed (seed))
 	do {
