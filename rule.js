@@ -16,7 +16,7 @@ const step = ({radix, neighbors}) => LUT => (past, index) =>
 
 const buildLUT = ({radix, neighbors}) => ruleNum =>
 	(new Uint8Array (neighbors ** radix)).map ((val, idx) => 
-		(ruleNum / Math.pow(radix, idx)) % radix
+		(ruleNum / radix ** idx) % radix
 	)
 
 const generation = ({radix, neighbors}) => stepFun => past => {
