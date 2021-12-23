@@ -1,6 +1,8 @@
 export const generateSeed = seedCode => {
 	if (seedFunctions [seedCode.slice (0, 2)])
-		return seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
+		return Uint8Array.from (
+			seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
+		)
 	else throw "invalid seed code: " + seedCode
 }
 
@@ -31,7 +33,6 @@ const randomDigits = (threshold = .5) => lengthLog2 => (
 	new Array (Math.ceil (2 ** Number.parseFloat (lengthLog2)))
 	.fill (0)
 	.map (() => Math.random () > threshold ? 1 : 0)
-	.join ('')
 )
 
 // todo: more parameterized seeds in general would be nice
@@ -41,6 +42,6 @@ const seedFunctions = {
 	cr: recurSubst (['00', '1'], '010'), // core (single 1 surrounded by 0s)
 	ts: recurSubst (['00', '11'], '01'), // transition (0 on one side, ones at the other)
 	dc: superDragon (['1', '0']),
-	kk: iter => superKolakosky ([1, 2]) (iter).map (x => x -1).join (''),
+	kk: iter => superKolakosky ([1, 2]) (iter).map (x => x -1),
 	rd: randomDigits (.5)
 }

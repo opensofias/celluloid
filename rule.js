@@ -9,10 +9,13 @@ export const rollout = config => seed => ruleNum => {
 }
 
 const step = ({radix, neighbors}) => LUT => (past, index) => 
-	LUT [Number.parseInt (
+	LUT [positional (
 		past.slice(index, index + neighbors),
 		radix
 	)]
+
+const positional = (digits = [], radix) => 
+	digits.reduce ((prev, cur) => prev * radix + cur, 0)
 
 const buildLUT = ({radix, neighbors}) => ruleNum =>
 	(new Uint8Array (neighbors ** radix)).map ((val, idx) => 
@@ -20,9 +23,9 @@ const buildLUT = ({radix, neighbors}) => ruleNum =>
 	)
 
 const generation = ({radix, neighbors}) => stepFun => past => {
-	let result = ''
+	let result = new Uint8Array (past.length + 1 - neighbors)
 	let index = 0
-	while (index + neighbors <= past.length)
-		result += stepFun (past, index++).toString (radix)
+	while (index < result.length)
+		result [index] = stepFun (past, index++).toString (radix)
 	return result 
 }
