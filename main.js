@@ -14,9 +14,9 @@ window.onload = window.onhashchange = _ => {
 const updateNav = config => {
 	const {page} = config
 	document.getElementById('prev').setAttribute('href',
-	toUri (Object.assign({}, config, {page: page - 1})))
+	toUri ({...config, ...{page: page - 1}}))
 	document.getElementById('next').setAttribute('href',
-	toUri (Object.assign({}, config, {page: page + 1})))
+	toUri ({...config, ...{page: page + 1}}))
 }
 
 const setDefaults = config => ({
