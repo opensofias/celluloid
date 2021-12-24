@@ -1,12 +1,13 @@
 import { elem } from "./tools.js"
 
-const hexColor = lightness => {
-	lightness *= 511
-	const hx = twoHex (lightness % 256)
-	return lightness < 256 ?
-	'#00' + hx + '00' :
-	'#' + hx + 'FF' + hx
-}
+const clamp255 = val => Math.max (0, Math.min (val, 255)) 
+
+const hexColor = lightness => '#' + (
+	[-.25, 0, - .5]
+	.map (x => (x + lightness) * 512)
+	.map (clamp255).map (twoHex)
+	.join ('')
+)
 
 const twoHex = num => (num | 0).toString(16).padStart (2, '0')
 
