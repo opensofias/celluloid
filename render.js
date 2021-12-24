@@ -63,8 +63,8 @@ export const render = (history, config) => {
 		row.forEach ((symbol, cIndex) => {
 			if (symbol == prevSymbol) streak ++
 			else {
-				ctx.fillStyle = hexColor (Number.parseInt (prevSymbol, radix) / (radix - 1))
-				Number.parseInt(prevSymbol) && ctx.fillRect (
+				ctx.fillStyle = hexColor (prevSymbol / (radix - 1))
+				prevSymbol && ctx.fillRect (
 					(shift + cIndex - streak) * zoom,
 					rIndex * zoom,
 					zoom * streak,
@@ -74,8 +74,8 @@ export const render = (history, config) => {
 				streak = 1
 		}})
 
-		ctx.fillStyle = hexColor (Number.parseInt (prevSymbol, radix) / (radix - 1))
-		Number.parseInt(prevSymbol) && ctx.fillRect (
+		ctx.fillStyle = hexColor (prevSymbol / (radix - 1))
+		prevSymbol && ctx.fillRect (
 			(row.length + shift - streak) * zoom,
 			rIndex * zoom,
 			zoom * streak,
