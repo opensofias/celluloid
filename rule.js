@@ -16,7 +16,7 @@ const buildLUT = ({radix, neighbors}) => ruleNum =>
 		(ruleNum / radix ** idx) % radix
 	)
 
-const generation = ({radix, neighbors}) => stepFun => past => {
+const generation = ({neighbors}) => stepFun => past => {
 	let result = new Uint8Array (past.length + 1 - neighbors)
 	let index = 0
 	while (index < result.length)
