@@ -12,11 +12,11 @@ window.onload = window.onhashchange = _ => {
 }
 
 const updateNav = config => {
-	const {page} = config
-	document.getElementById('prev').setAttribute('href',
-	toUri ({...config, ...{page: page - 1}}))
-	document.getElementById('next').setAttribute('href',
-	toUri ({...config, ...{page: page + 1}}))
+	[['prev', -1], ['next', 1]].map (button =>
+		document.getElementById(button[0]).setAttribute('href',
+			toUri ({...config, ...{page: config.page + button [1]}})
+		)
+	)
 }
 
 const setDefaults = config => ({
