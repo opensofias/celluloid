@@ -45,16 +45,15 @@ export const render = (history, config) => {
 				this.toDataURL ()
 	)})
 
+	const paintRect = (symbol, ...rect) => {
+		ctx.fillStyle = hexColor (symbol / (radix - 1))
+		ctx.fillRect (...(rect.map (x => x * zoom)))
+	}
+
 	history.forEach ((row, rIndex) => {
 		const shift = (history[0].length - row.length) / 2
 
-		ctx.fillStyle = "#000"
-		ctx.fillRect (
-			shift * zoom,
-			rIndex * zoom,
-			zoom * row.length,
-			zoom
-		)
+		paintRect (0, shift, rIndex, row.length, 1)
 
 		let prevSymbol = row[0]
 		let streak = 0
@@ -62,23 +61,16 @@ export const render = (history, config) => {
 		row.forEach ((symbol, cIndex) => {
 			if (symbol == prevSymbol) streak ++
 			else {
-				ctx.fillStyle = hexColor (prevSymbol / (radix - 1))
-				prevSymbol && ctx.fillRect (
-					(shift + cIndex - streak) * zoom,
-					rIndex * zoom,
-					zoom * streak,
-					zoom
+				prevSymbol && paintRect (prevSymbol, 
+					(shift + cIndex - streak), rIndex, streak, 1
 				)
 				prevSymbol = symbol
 				streak = 1
 		}})
 
-		ctx.fillStyle = hexColor (prevSymbol / (radix - 1))
-		prevSymbol && ctx.fillRect (
-			(row.length + shift - streak) * zoom,
-			rIndex * zoom,
-			zoom * streak,
-			zoom
-	)})
+		prevSymbol && paintRect (prevSymbol, 
+			(row.length + shift - streak), rIndex, streak, 1
+		)
+	})
 	return el
 }
