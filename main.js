@@ -19,8 +19,10 @@ const updateNav = config => {
 	toUri (Object.assign({}, config, {page: page + 1})))
 }
 
-const setDefaults = config =>
-	Object.assign ({}, {amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'}, config)
+const setDefaults = config => ({
+	...{amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'},
+	...config
+})
 
 const makeAll = config => {
 	removeAll(['canvas', 'svg'])
