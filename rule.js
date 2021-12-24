@@ -2,8 +2,8 @@
 
 export const rollout = config => seed => ruleNum => {
 	let result = [seed]
-	const stepFun = step (config) (buildLUT (config) (ruleNum))
-	do result.push (generation (config) (stepFun) (result [result.length -1]))
+	const genFun = generation (config) (step (config) (buildLUT (config) (ruleNum)))
+	do result.push (genFun (result [result.length -1]))
 	while (result [result.length -1].length >= config.neighbors)
 	return result
 }
