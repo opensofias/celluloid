@@ -1,10 +1,10 @@
 import { elem } from "./tools.js"
 
 const hexColor = lightness => '#' + (
-	[-.25, 0, - .5]
-	.map (chan => (chan + lightness) * 512)
-	.map (chan => Math.max (0, Math.min (chan, 255)))
-	.map (chan => (chan | 0).toString(16).padStart (2, '0'))
+	[-.25, 0, - .5] // offsets
+	.map (chan => (chan + lightness) * 512) // use offsets
+	.map (chan => Math.max (0, Math.min (chan, 255))) // clamp
+	.map (chan => (chan | 0).toString(16).padStart (2, '0')) // convert to hex
 	.join ('')
 )
 
