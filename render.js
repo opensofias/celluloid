@@ -47,7 +47,6 @@ export const render = (history, config) => {
 
 	history.forEach ((row, rIndex) => {
 		const shift = (history[0].length - row.length) / 2
-		//row = row.split('')
 
 		ctx.fillStyle = "#000"
 		ctx.fillRect (
