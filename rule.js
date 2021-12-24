@@ -20,6 +20,6 @@ const generation = ({radix, neighbors}) => stepFun => past => {
 	let result = new Uint8Array (past.length + 1 - neighbors)
 	let index = 0
 	while (index < result.length)
-		result [index] = stepFun (past, index++).toString (radix)
+		result [index] = stepFun (past, index++)
 	return result 
 }
