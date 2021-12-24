@@ -2,9 +2,9 @@ import { elem } from "./tools.js"
 
 const hexColor = lightness => '#' + (
 	[-.25, 0, - .5]
-	.map (x => (x + lightness) * 512)
-	.map (val => Math.max (0, Math.min (val, 255)))
-	.map (num => (num | 0).toString(16).padStart (2, '0'))
+	.map (chan => (chan + lightness) * 512)
+	.map (chan => Math.max (0, Math.min (chan, 255)))
+	.map (chan => (chan | 0).toString(16).padStart (2, '0'))
 	.join ('')
 )
 
