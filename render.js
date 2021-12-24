@@ -22,8 +22,7 @@ const svgContext = svgElem => ({
 }))}})
 
 export const render = (history, config) => {
-	const {radix, svg, ruleNum} = config
-	const zoom = config.zoom || 2
+	const {radix, svg, ruleNum, zoom} = config
 
 	const el = elem ({
 		tag: svg ? 'svg' : 'canvas',

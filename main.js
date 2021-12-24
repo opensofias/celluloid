@@ -20,7 +20,7 @@ const updateNav = config => {
 }
 
 const setDefaults = config => ({
-	...{amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6'},
+	...{amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6', zoom: 2},
 	...config
 })
 
