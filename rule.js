@@ -1,5 +1,3 @@
-// todo: use TypedArrays instead of strings for speedup
-
 export const rollout = config => seed => ruleNum => {
 	let result = [seed]
 	const genFun = generation (config) (step (config) (buildLUT (config) (ruleNum)))
