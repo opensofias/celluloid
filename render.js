@@ -1,15 +1,12 @@
 import { elem } from "./tools.js"
 
-const clamp255 = val => Math.max (0, Math.min (val, 255)) 
-
 const hexColor = lightness => '#' + (
 	[-.25, 0, - .5]
 	.map (x => (x + lightness) * 512)
-	.map (clamp255).map (twoHex)
+	.map (val => Math.max (0, Math.min (val, 255)))
+	.map (num => (num | 0).toString(16).padStart (2, '0'))
 	.join ('')
 )
-
-const twoHex = num => (num | 0).toString(16).padStart (2, '0')
 
 const svgContext = svgElem => ({
 	el: svgElem, fillStyle: undefined,
