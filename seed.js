@@ -1,10 +1,7 @@
-export const generateSeed = seedCode => {
-	if (seedFunctions [seedCode.slice (0, 2)])
-		return Uint8Array.from (
-			seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
-		)
-	else throw "invalid seed code: " + seedCode
-}
+export const generateSeed = seedCode =>
+	seedFunctions [seedCode.slice (0, 2)] ? Uint8Array.from (
+		seedFunctions [seedCode.slice (0, 2)] (seedCode.slice (2))
+	): (console.log ("invalid seed code: " + seedCode), [0])
 
 const superDragon = (fillers = ['1', '0'], strings = []) => iter => 
 	iter <= -1 ? strings [0] : superDragon (
