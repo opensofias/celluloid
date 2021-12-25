@@ -1,12 +1,11 @@
 import { elem } from "./tools.js"
 
-const hexColor = lightness => '#' + (
-	[-.25, 0, - .5] // offsets
+const hexColor = lightness => '#' +
+	[-.25, 0, -.5] // offsets
 	.map (chan => (chan + lightness) * 512) // use offsets
 	.map (chan => Math.max (0, Math.min (chan, 255))) // clamp
 	.map (chan => (chan | 0).toString(16).padStart (2, '0')) // convert to hex
 	.join ('')
-)
 
 const svgContext = svgElem => ({
 	el: svgElem, fillStyle: undefined,
@@ -31,8 +30,7 @@ export const render = (history, config) => {
 			width: (history [0].length) * zoom,
 			[svg ? 'xmlns' : 'title']:
 				svg ? 'http://www.w3.org/2000/svg' : ruleNum
-		},
-		svg
+		}, svg
 	})
 
 	const ctx = svg ? svgContext(el) : el.getContext('2d')
@@ -44,18 +42,17 @@ export const render = (history, config) => {
 				this.toDataURL ()
 	)})
 
-	const paintRect = (symbol, ...rect) => {
-		ctx.fillStyle = hexColor (symbol / (radix - 1))
+	const paintRect = (symbol, ...rect) => (
+		ctx.fillStyle = hexColor (symbol / (radix - 1)),
 		ctx.fillRect (...(rect.map (x => x * zoom)))
-	}
+	)
 
 	history.forEach ((row, rIndex) => {
 		const shift = (history[0].length - row.length) / 2
 
 		paintRect (0, shift, rIndex, row.length, 1)
 
-		let prevSymbol = row[0]
-		let streak = 0
+		let prevSymbol = row[0]; let streak = 0
 
 		row.forEach ((symbol, cIndex) => {
 			if (symbol == prevSymbol) streak ++
@@ -63,8 +60,7 @@ export const render = (history, config) => {
 				prevSymbol && paintRect (prevSymbol, 
 					(shift + cIndex - streak), rIndex, streak, 1
 				)
-				prevSymbol = symbol
-				streak = 1
+				prevSymbol = symbol; streak = 1
 		}})
 
 		prevSymbol && paintRect (prevSymbol, 
