@@ -27,7 +27,7 @@ export const fromUri = (uriString = "") =>
 	JSON.parse ( '{"' + replaceInString (decodeURI(
 		addTerminator ('~') (
 			uriString.includes (':') ?
-				replaceInString (uriString, uriMap.legacy) : legacy
+				replaceInString (uriString, uriMap.legacy) : uriString
 		).slice(1)
 	), uriMap.from) + '}')
 
