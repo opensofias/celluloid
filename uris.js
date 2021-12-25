@@ -6,9 +6,9 @@ const flipObj = obj =>
 	, {})
 
 const uriMap = {to: {
-	',"':'&',
-	'":':'=',
-	'"':"~"
+	',"':'&', '":':'=', '"':"~"
+}, legacy : {
+	':':'=', "'": '~', ',':'&'
 }}
 
 uriMap.from = flipObj (uriMap.to)
@@ -22,10 +22,13 @@ export const toUri = obj =>
 		)
 	)
 
-export const fromUri = uriString =>
+export const fromUri = (uriString = "") =>
 	uriString.length <= 1 ? {} :
 	JSON.parse ( '{"' + replaceInString (decodeURI(
-		addTerminator ('~') (uriString).slice(1)
+		addTerminator ('~') (
+			uriString.includes (':') ?
+				replaceInString (uriString, uriMap.legacy) : legacy
+		).slice(1)
 	), uriMap.from) + '}')
 
 const addTerminator = term => uriString =>
