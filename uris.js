@@ -7,8 +7,6 @@ const flipObj = obj =>
 
 const uriMap = {to: {
 	',"':'&', '":':'=', '"':"~"
-}, legacy : {
-	':':'=', "'": '~', ',':'&'
 }}
 
 uriMap.from = flipObj (uriMap.to)
@@ -25,15 +23,20 @@ export const toUri = obj =>
 export const fromUri = (uriString = "") =>
 	uriString.length <= 1 ? {} :
 	JSON.parse ( '{"' + replaceInString (decodeURI(
-		addTerminator ('~') (
-			uriString.includes (':') ?
-				replaceInString (uriString, uriMap.legacy) : uriString
-		).slice(1)
+		addTerminator ('~') (convertLegacy (uriString)).slice(1)
 	), uriMap.from) + '}')
 
 const addTerminator = term => uriString =>
 	(uriString.split (term)).length % 2 ?
 	uriString : uriString + term
+
+const convertLegacy = string => 
+	string.includes (':') ?
+		console.log ('you are using the legacy URI format, please switch') ||
+		replaceInString (string, {
+			':':'=', "'": '~', ',':'&'
+		})
+	: string
 
 const replaceInString = (string, replaceMap) =>
 	Object.entries(replaceMap).reduce (
