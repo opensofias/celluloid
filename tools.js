@@ -1,5 +1,3 @@
-'use strict'
-
 export const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 	const result = svg ?
 		document.createElementNS ('http://www.w3.org/2000/svg', tag) :
