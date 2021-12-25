@@ -5,11 +5,9 @@ const flipObj = obj =>
 		(acc[obj[key]] = key) && acc
 	, {})
 
-const uriMap = {to: {
-	',"':'&', '":':'=', '"':"~"
-}}
-
-uriMap.from = flipObj (uriMap.to)
+const uriMap = (to => ({
+	to, from: flipObj (to)
+})) ({',"':'&', '":':'=', '"':"~"})
 
 export const toUri = obj =>
 	'#' + encodeURI (
