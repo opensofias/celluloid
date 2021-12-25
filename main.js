@@ -27,7 +27,7 @@ const makeAll = config => {
 	updateNav (config)
 	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
-	end = end || amount ? start + amount : radix ** (radix ** neighbors)
+	end = end || (amount != -1) ? start + amount : radix ** (radix ** neighbors)
 	let ruleNum = start;
 	const rolloutFun = rollout (config) (generateSeed (seed))
 	do {
