@@ -32,7 +32,7 @@ const addTerminator = term => uriString =>
 
 const convertLegacy = string => 
 	string.includes (':') ?
-		console.log ('you are using the legacy URI format, please switch') ||
+		console.warn ('you are using the legacy URI format, please switch') ||
 		replaceInString (string, {
 			':':'=', "'": '~', ',':'&'
 		})
