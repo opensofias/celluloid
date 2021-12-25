@@ -48,11 +48,11 @@ export const render = (history, config) => {
 	)
 
 	history.forEach ((row, rIndex) => {
-		const shift = (history[0].length - row.length) / 2
+		const shift = (history [0].length - row.length) / 2
 
 		paintRect (0, shift, rIndex, row.length, 1)
 
-		let prevSymbol = row[0]; let streak = 0
+		let prevSymbol = row [0]; let streak = 0
 
 		row.forEach ((symbol, cIndex) => {
 			if (symbol == prevSymbol) streak ++
