@@ -7,14 +7,12 @@ export const elem = ({tag = 'div', attr = {}, content = [], svg = false}) => {
 
 	for (const name in attr) result.setAttribute(name, attr[name])
 
-	void {
-		string: _ => result.innerText = content,
-		number: _ => result.innerText = content.toString(),
-		undefined: _ => 0,
-		object: _ => content instanceof Array ?
-			content.forEach(contEl => result.appendChild(contEl)) :
-			result.appendChild(content)
-	} [typeof content] ()
+	void (type => 
+		['string', 'number'].includes (type) ?
+			result.innerText = content :
+		type == 'object' && [content].flat ()
+			.forEach(contEl => result.appendChild(contEl))
+	) (typeof content)
 
 	return result
 }
