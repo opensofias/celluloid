@@ -6,9 +6,7 @@ import { fromUri, toUri } from "./uris.js"
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
 		(location.hash = toUri (setDefaults({})))
-	const uriObj = fromUri (location.hash)
-	updateNav (uriObj)
-	makeAll (uriObj)
+	makeAll (setDefaults (fromUri (location.hash)))
 }
 
 const updateNav = config => {
@@ -26,6 +24,7 @@ const setDefaults = config => ({
 
 const makeAll = config => {
 	removeAll(['canvas', 'svg'])
+	updateNav (config)
 	let {neighbors, radix, start, end, page, amount, seed} = config
 	start = start || page ? page * amount : 0;
 	end = end || amount ? start + amount : radix ** (radix ** neighbors)
