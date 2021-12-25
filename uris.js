@@ -18,7 +18,7 @@ export const toUri = obj =>
 		)
 	)
 
-export const fromUri = (uriString = "") =>
+export const fromUri = uriString =>
 	uriString.length <= 1 ? {} :
 	JSON.parse ( '{"' + replaceInString (decodeURI(
 		addTerminator ('~') (convertLegacy (uriString)).slice(1)
