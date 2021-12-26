@@ -27,8 +27,8 @@ const makeAll = config => {
 	removeAll(['canvas', 'svg'])
 	updateNav (config)
 	let {neighbors, radix, start, end, page, amount, seed} = config
-	start = start || page ? page * amount : 0;
-	end = end || (amount != -1) ? start + amount : radix ** (radix ** neighbors)
+	start = start ?? (page ? page * amount : 0)
+	end = end ?? ((amount != -1) ? start + amount : radix ** (radix ** neighbors))
 	let ruleNum = start;
 	const rolloutFun = rollout (config) (generateSeed (seed))
 	do {
