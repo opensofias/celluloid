@@ -34,13 +34,12 @@ const makeAll = config => {
 	)
 	let ruleNum = start;
 	const rolloutFun = rollout (config) (generateSeed (seed))
-	do {
-		const el = render (
+	do document.body.appendChild (
+		render (
 			rolloutFun (ruleNum),
 			{ruleNum, __proto__: config}
-		)
-		document.body.appendChild (el)
-	} while (++ ruleNum < end)
+		))
+	while (++ ruleNum < end)
 }
 
 const removeAll = tags =>
