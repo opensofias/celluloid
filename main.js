@@ -5,8 +5,8 @@ import { fromUri, toUri } from "./uris.js"
 
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
-		console.log ('no pameters given, using defaults') ||
-		(location.hash = toUri (setDefaults({})))
+		(console.log ('no pameters given, using defaults') ||
+		(location.hash = toUri (setDefaults({}))))
 	makeAll (setDefaults (fromUri (location.hash)))
 }
 
