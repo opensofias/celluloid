@@ -27,9 +27,8 @@ const makeAll = config => {
 	removeAll(['canvas', 'svg'])
 	updateNav (config)
 	let {neighbors, radix, start, end, page, amount, seed, only} = config
-	start = start ?? only ??
-		(page ? page * amount : 0)
-	end = end ?? (only ? only + 1 :
+	start ??= only ?? (page ? page * amount : 0)
+	end ??= (only ? only + 1 :
 		(amount != -1) ? start + amount :
 		radix ** (radix ** neighbors)
 	)
