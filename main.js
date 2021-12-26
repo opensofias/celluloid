@@ -6,7 +6,7 @@ import { fromUri, toUri } from "./uris.js"
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
 		(console.log ('no pameters given, using defaults') ||
-		(location.hash = toUri (setDefaults({}))))
+		(location.hash = toUri (setDefaults())))
 	makeAll (setDefaults (fromUri (location.hash)))
 }
 
@@ -18,7 +18,7 @@ const updateNav = config => {
 	)
 }
 
-const setDefaults = config => ({
+const setDefaults = (config = {}) => ({
 	...{amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6', zoom: 2},
 	...config
 })
