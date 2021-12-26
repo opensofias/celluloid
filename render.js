@@ -54,14 +54,12 @@ export const render = (history, config) => {
 
 		let prevSymbol = row [0]; let streak = 0
 
-		row.forEach ((symbol, cIndex) => {
-			if (symbol == prevSymbol) streak ++
-			else {
+		row.forEach ((symbol, cIndex) => 
+			symbol == prevSymbol ? streak ++ :
 				prevSymbol && paintRect (prevSymbol, 
 					(shift + cIndex - streak), rIndex, streak, 1
-				)
-				prevSymbol = symbol; streak = 1
-		}})
+				) || ([prevSymbol, streak] = [symbol, 1])
+		)
 
 		prevSymbol && paintRect (prevSymbol, 
 			(row.length + shift - streak), rIndex, streak, 1
