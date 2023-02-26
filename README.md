@@ -17,3 +17,4 @@ the start seed functions include
 * tm: Thoe-Morse sequence
 * kk: Kolakosky sequence (reduced by 1)
 * rb: rabbit sequence (aka Fibonacci word)
+* ct: Cantor set sequence
