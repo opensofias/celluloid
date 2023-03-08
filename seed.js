@@ -17,15 +17,15 @@ const superKolakosky = (seed = [1, 2], prev) => iter =>
 
 const superCantor = seed => iter =>
 	iter ?
-		superCantor (seed) (iter - 1).map (
+		superCantor (seed) (iter - 1).flatMap (
 			x => seed.map (y => Math.min (x, y))
-		). flat () :
+		) :
 	[Math.max(...seed)]
 
 const runAlong = (seed, prev = []) =>
-	prev.map ((repCount, idx) =>
+	prev.flatMap ((repCount, idx) =>
 		new Array (repCount).fill (seed [idx % seed.length])
-	).flat ()
+	)
 
 const recurSubst = (lookup, prev = '0') => iter =>
 	iter <= 0 ? prev : recurSubst (
