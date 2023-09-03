@@ -2,6 +2,7 @@ import { generateSeed } from "./seed.js"
 import { rollout } from "./rule.js"
 import { render } from "./render.js"
 import { fromUri, toUri } from "./uris.js"
+import { defaults } from "./defaults.js"
 
 window.onload = window.onhashchange = _ => {
 	location.hash.length <= 1 &&
@@ -18,10 +19,7 @@ const updateNav = config => {
 	)
 }
 
-const setDefaults = (config = {}) => ({
-	...{amount: 16, page: 0, neighbors: 2, radix: 2, seed: 'ts6', zoom: 2},
-	...config
-})
+const setDefaults = (config = {}) => ({	...defaults, ...config })
 
 const makeAll = config => {
 	removeAll(['canvas', 'svg'])
