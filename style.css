@@ -15,21 +15,21 @@ nav {
 	flex-direction: column;
 	align-content: stretch;
 	align-items: stretch;
+	> a {
+		color: #fff;
+		display: block;
+		background-color: #000a;
+		text-align: center;
+		line-height: 0;
+		padding-top: 25vh; 
+		padding-bottom: 25vh; 
+		text-decoration: none;
+		font-size: 24px;
+	}
+	> a:hover {
+		background-color: #0005;
+	}
 }
-
-nav > a {
-	color: #fff;
-	display: block;
-	background-color: #000a;
-	text-align: center;
-	line-height: 0;
-	padding-top: 25vh; 
-	padding-bottom: 25vh; 
-	text-decoration: none;
-	font-size: 24px;
-}
-
-nav > a:hover {background-color: #0005;}
 
 main {
 	display: flex;
